@@ -40,7 +40,6 @@ public class MemberController {
 		return "board";
 	}
 	
-	
 	//회원 CRUD
 	
 	@PostMapping("/regist")
