@@ -146,7 +146,7 @@ MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 			<li class="nav-item"><a class="nav-link"
 					href="${root}/member/mvboard">게시판</a></li>
 				<li class="nav-item"><a class="nav-link"
-					href="${root}/main?act=list&pg=1&key=&word=">공지사항</a></li>
+					href="${root}/notice/list">공지사항</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="https://news.google.com/topstories?hl=ko&gl=KR&ceid=KR:ko">오늘의뉴스</a></li>
 				<%-- <li class="nav-item"><a class="nav-link" href="<%=root%>/main?act=mvfavorite">관심지역등록</a></li> --%>

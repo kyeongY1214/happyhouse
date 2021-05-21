@@ -6,28 +6,28 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssafy.happyhouse.model.GuestBookDto;
+import com.ssafy.happyhouse.model.NoticeDto;
 import com.ssafy.model.util.PageConstance;
 import com.ssafy.model.util.PageNavigation;
 
 
 @Service
-public class GuestBookServiceImpl implements GuestBookService {
+public class NoticeServiceImpl implements NoticeService {
 	
 	@Autowired
 	SqlSession sqlsession;
 	
 
 	@Override
-	public void writeArticle(GuestBookDto guestBookDto) throws Exception {
-		if(guestBookDto.getSubject() == null || guestBookDto.getContent() == null) {
+	public void writeNotice(NoticeDto noticeDto) throws Exception {
+		if(noticeDto.getSubject() == null || noticeDto.getContent() == null) {
 			throw new Exception();
 		}
 		//write
 	}
 
 	@Override
-	public List<GuestBookDto> listArticle(int pg, String key, String word) throws Exception {
+	public List<NoticeDto> listNotice(int pg, String key, String word) throws Exception {
 		int start = (pg - 1) * PageConstance.LIST_SIZE;
 		key = key == null ? "" : key;
 		word = word == null ? "" : word;
@@ -50,17 +50,17 @@ public class GuestBookServiceImpl implements GuestBookService {
 	}
 
 	@Override
-	public GuestBookDto getArticle(int articleno) throws Exception {
+	public NoticeDto getNotice(int articleno) throws Exception {
 		return null;
 	}
 
 	@Override
-	public void modifyArticle(GuestBookDto guestBookDto) throws Exception {
+	public void modifyNotice(NoticeDto guestBookDto) throws Exception {
 		
 	}
 
 	@Override
-	public void deleteArticle(int articleno) throws Exception {
+	public void deleteNotice(int articleno) throws Exception {
 		
 	}
 

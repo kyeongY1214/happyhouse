@@ -3,20 +3,20 @@ package com.ssafy.happyhouse.model;
 //Dto : Data Transfer Object
 //VO : Value Object
 //Bean
-public class GuestBookDto {
+public class NoticeDto {
 
-	private int articleno;
+	private int noticeno;
 	private String userid;
 	private String subject;
 	private String content;
 	private String regtime;
 
 	public int getArticleno() {
-		return articleno;
+		return noticeno;
 	}
 
-	public void setArticleno(int articleno) {
-		this.articleno = articleno;
+	public void setArticleno(int noticeno) {
+		this.noticeno = noticeno;
 	}
 
 	public String getUserid() {
