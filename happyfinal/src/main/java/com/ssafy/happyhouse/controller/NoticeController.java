@@ -17,9 +17,7 @@ public class NoticeController {
 	
 	@RequestMapping("/list")
 	public String NoticeListMain() {
-		
-		
-		System.out.println("sys : 공지메인 진입 ");
+	 
 		return "notice/list";
 		
 	}
