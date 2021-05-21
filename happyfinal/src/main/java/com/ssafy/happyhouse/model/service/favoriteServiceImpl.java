@@ -16,6 +16,8 @@ public class favoriteServiceImpl implements favoriteService {
 	@Autowired
 	SqlSession sqlsession;
 	
+	
+	
 	@Override
 	public ArrayList<HouseDto> getFavoriteList(String userid) throws SQLException {
 		return null;
