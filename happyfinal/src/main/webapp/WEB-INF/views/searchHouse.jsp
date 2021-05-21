@@ -66,7 +66,7 @@
 								index++;
 							}
 							var data = {
-									title : '${house.aptName}',
+									content : '<div>${{house.aptName}}</div>',
 									latlng : new kakao.maps.LatLng(${house.lat}, ${house.lng})
 							}
 							console.log(data);
@@ -85,6 +85,10 @@
 						    // 마커 이미지를 생성합니다    
 						    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
 						    
+						    var infowindow = new kakao.maps.InfoWindow({
+						        content: positions[i].content // 인포윈도우에 표시할 내용
+						    });
+						    
 						    // 마커를 생성합니다
 						    var marker = new kakao.maps.Marker({
 						        map: map, // 마커를 표시할 지도
@@ -92,8 +96,24 @@
 						        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 						        image : markerImage // 마커 이미지 
 						    });
+						    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+						    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 						}
 						
+						
+						// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+						function makeOverListener(map, marker, infowindow) {
+						    return function() {
+						        infowindow.open(map, marker);
+						    };
+						}
+
+						// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+						function makeOutListener(infowindow) {
+						    return function() {
+						        infowindow.close();
+						    };
+						}
 					</script>
 				</div>
 
