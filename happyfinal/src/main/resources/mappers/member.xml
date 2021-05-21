@@ -9,6 +9,7 @@
 		values(#{userId},#{userName},#{userPwd},#{email},#{address})
 	</insert>
 	
+	
 	<select id="login" parameterType="map" resultType="member">
 		select username, userid, email
 		from member

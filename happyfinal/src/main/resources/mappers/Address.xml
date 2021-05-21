@@ -21,4 +21,5 @@
 		where city=#{city}
 	</select>
 	
+	
 </mapper>

@@ -27,6 +27,7 @@
 		)
 	</insert>
 	
+	
 	<!-- 게시글 수정 -->
 	<update id="updateBoard" parameterType="board">
 		update vue_board 
