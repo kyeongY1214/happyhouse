@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.mapper.AddressMapper">
+	<select id ="getDong" parameterType="map" resultType="String">
+		SELECT distinct dong 
+		FROM dongcode 
+		where city=#{city} AND gugun=#{gu}
+	</select>
+	
+	<select id ="getGugun" parameterType="String" resultType="String">
+		SELECT distinct gugun 
+		FROM dongcode 
+		where city=#{city}
+	</select>
+	
+	<select id ="getCity" parameterType="String" resultType="String">
+		SELECT distinct gugun 
+		FROM dongcode 
+		where city=#{city}
+	</select>
+	
+</mapper>
