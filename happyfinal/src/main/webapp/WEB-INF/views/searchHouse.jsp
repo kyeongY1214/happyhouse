@@ -56,6 +56,7 @@
 						var jsonarray = new Array();
 						
 						var index=0;
+						var positions= [];
 						<c:forEach var="house" items="${houseList}">
 							if(index==0){
 								var options = {
@@ -68,15 +69,12 @@
 									title : '${house.aptName}',
 									latlng : new kakao.maps.LatLng(${house.lat}, ${house.lng})
 							}
-							
-							jsonarray.push(data);
+							console.log(data);
+							positions.push(data);
 						</c:forEach>
 					
 						var map = new kakao.maps.Map(container, options);
-						var positions = JSON.stringify(jsonarray);
-					
-						
-						document.write(positions);
+
 						var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
 					   
 						for (var i = 0; i < positions.length; i ++) {
