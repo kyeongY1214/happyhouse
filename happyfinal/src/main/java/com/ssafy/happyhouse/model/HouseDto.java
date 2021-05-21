@@ -1,6 +1,6 @@
 package com.ssafy.happyhouse.model;
 
-//하는 사람이 쓰기
+//확인!!!
 public class HouseDto {
 	//추가
 	@Override
