@@ -34,7 +34,7 @@
 	  <div class="jumbotron">
 	    <h1>글작성 성공!!!</h1>      
 	  </div>  
-	  <p><a href="${root}/main?act=list&pg=1&key=&word=">글목록</a></p>
+	  <p><a href="${root}/notice/list?pg=1&key=&word=">글목록</a></p>
 	</div>
 </div>
 </body>

@@ -11,13 +11,15 @@ public class NoticeDto {
 	private String content;
 	private String regtime;
 
-	public int getArticleno() {
+	
+	public int getNoticeno() {
 		return noticeno;
 	}
 
-	public void setArticleno(int noticeno) {
+	public void setNoticeno(int noticeno) {
 		this.noticeno = noticeno;
 	}
+	
 
 	public String getUserid() {
 		return userid;

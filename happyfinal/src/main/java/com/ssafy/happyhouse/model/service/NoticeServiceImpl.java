@@ -1,13 +1,15 @@
 package com.ssafy.happyhouse.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.happyhouse.model.NoticeDto;
-import com.ssafy.model.util.PageConstance;
+import com.ssafy.happyhouse.model.mapper.NoticeMapper;
 import com.ssafy.model.util.PageNavigation;
 
 
@@ -15,7 +17,7 @@ import com.ssafy.model.util.PageNavigation;
 public class NoticeServiceImpl implements NoticeService {
 	
 	@Autowired
-	SqlSession sqlsession;
+	private SqlSession sqlsession;
 	
 
 	@Override
@@ -23,45 +25,61 @@ public class NoticeServiceImpl implements NoticeService {
 		if(noticeDto.getSubject() == null || noticeDto.getContent() == null) {
 			throw new Exception();
 		}
-		//write
+		sqlsession.getMapper(NoticeMapper.class).writeNotice(noticeDto);
+	}
+
+
+	@Override
+	public NoticeDto getNotice(int noticeno) throws Exception {
+		return sqlsession.getMapper(NoticeMapper.class).getNotice(noticeno);
 	}
 
 	@Override
-	public List<NoticeDto> listNotice(int pg, String key, String word) throws Exception {
-		int start = (pg - 1) * PageConstance.LIST_SIZE;
-		key = key == null ? "" : key;
-		word = word == null ? "" : word;
-		return null;
-	}
-	
-	public PageNavigation makeNavigator(int pg, String key, String word) throws Exception {
-		int naviSize = PageConstance.NAVI_SIZE;
-		PageNavigation navigation = new PageNavigation();
-		//int totalCount = guestBookDao.getTotalCount(key, word);
-		//navigation.setTotalCount(totalCount);
-		//int totalPageCount = (totalCount - 1) / PageConstance.LIST_SIZE + 1;
-//		navigation.setTotalPageCount(totalPageCount);
-//		navigation.setCurrentPage(pg);
-//		navigation.setNaviSize(naviSize);
-//		navigation.setStartRange(pg <= naviSize);
-//		navigation.setEndRange((totalPageCount - 1) / naviSize * naviSize < pg);
-//		navigation.makeNavigator();
-		return navigation;
+	public void modifyNotice(NoticeDto noticeDto) throws Exception {
+		sqlsession.getMapper(NoticeMapper.class).modifyNotice(noticeDto);
 	}
 
 	@Override
-	public NoticeDto getNotice(int articleno) throws Exception {
-		return null;
+	public void deleteNotice(int noticeno) throws Exception {
+		sqlsession.getMapper(NoticeMapper.class).deleteNotice(noticeno);
 	}
 
-	@Override
-	public void modifyNotice(NoticeDto guestBookDto) throws Exception {
-		
-	}
+
 
 	@Override
-	public void deleteNotice(int articleno) throws Exception {
-		
+	public List<NoticeDto> listNotice(Map<String, String> map) throws Exception {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("key", map.get("key") == null ? "" : map.get("key"));
+		param.put("word", map.get("word") == null ? "" : map.get("word"));
+		int currentPage = Integer.parseInt(map.get("pg"));
+		int sizePerPage = Integer.parseInt(map.get("spp"));
+		int start = (currentPage - 1) * sizePerPage;
+		param.put("start", start);
+		param.put("spp", sizePerPage);
+		return sqlsession.getMapper(NoticeMapper.class).listNotice(param);
 	}
+
+
+
+	@Override
+	public PageNavigation makePageNavigation(Map<String, String> map) throws Exception  {
+		int naviSize = 10;
+		int currentPage = Integer.parseInt(map.get("pg"));
+		int sizePerPage = Integer.parseInt(map.get("spp"));
+		PageNavigation pageNavigation = new PageNavigation();
+		pageNavigation.setCurrentPage(currentPage);
+		pageNavigation.setNaviSize(naviSize);
+		int totalCount = sqlsession.getMapper(NoticeMapper.class).getTotalCount(map);
+		pageNavigation.setTotalCount(totalCount);
+		int totalPageCount = (totalCount - 1) / sizePerPage + 1;
+		pageNavigation.setTotalPageCount(totalPageCount);
+		boolean startRange = currentPage <= naviSize;
+		pageNavigation.setStartRange(startRange);
+		boolean endRange = (totalPageCount - 1) / naviSize * naviSize < currentPage;
+		pageNavigation.setEndRange(endRange);
+		pageNavigation.makeNavigator();
+		return pageNavigation;
+	}
+
 
 }

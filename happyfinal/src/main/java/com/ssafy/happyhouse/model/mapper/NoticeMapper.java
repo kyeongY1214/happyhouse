@@ -2,22 +2,21 @@ package com.ssafy.happyhouse.model.mapper;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
-
 import com.ssafy.happyhouse.model.NoticeDto;
 
 @Mapper
 public interface NoticeMapper {
 
-	public void writeArticle(NoticeDto guestBookDto) throws SQLException;
-	public List<NoticeDto> listArticle(int start, String key, String word) throws SQLException;
+	public void writeNotice(NoticeDto noticeDto) throws SQLException;
+	public List<NoticeDto> listNotice(Map<String, Object> map) throws SQLException;
 	
-	public NoticeDto getArticle(int articleno) throws SQLException;
-	public void modifyArticle(NoticeDto guestBookDto) throws SQLException;
-	public void deleteArticle(int articleno) throws SQLException;
-	
-	public int getTotalCount(String key, String word) throws SQLException;
+	public NoticeDto getNotice(int noticeno) throws SQLException;
+	public void modifyNotice(NoticeDto noticeDto) throws SQLException;
+	public void deleteNotice(int noticeno) throws SQLException;
+	public int getTotalCount(Map<String, String> map) throws SQLException;
 	
 }
