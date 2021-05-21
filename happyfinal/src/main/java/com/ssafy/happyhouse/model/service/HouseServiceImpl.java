@@ -8,8 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssafy.happyhouse.mapper.HouseMapper;
 import com.ssafy.happyhouse.model.HouseDto;
+import com.ssafy.happyhouse.model.mapper.HouseMapper;
 
 
 @Service

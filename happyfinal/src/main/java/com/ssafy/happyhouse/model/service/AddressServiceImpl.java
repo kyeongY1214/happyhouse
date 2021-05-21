@@ -9,14 +9,14 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssafy.happyhouse.mapper.AddressMapper;
+import com.ssafy.happyhouse.model.mapper.AddressMapper;
 
 
 @Service
 public class AddressServiceImpl implements AddressService {
 	
 	@Autowired
-	SqlSession sqlsession;
+	private SqlSession sqlsession;
 
 	@Override
 	public List<String> getCity(String city) throws SQLException {

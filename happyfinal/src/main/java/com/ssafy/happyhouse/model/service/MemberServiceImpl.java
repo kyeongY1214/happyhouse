@@ -7,15 +7,15 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssafy.happyhouse.mapper.MemberMapper;
 import com.ssafy.happyhouse.model.MemberDto;
+import com.ssafy.happyhouse.model.mapper.MemberMapper;
 
 @Service
 public class MemberServiceImpl implements MemberService {
 	
 	
 	@Autowired
-	SqlSession sqlsession;
+	private SqlSession sqlsession;
 	
 	@Override
 	public void registerMember(MemberDto memberDto) {

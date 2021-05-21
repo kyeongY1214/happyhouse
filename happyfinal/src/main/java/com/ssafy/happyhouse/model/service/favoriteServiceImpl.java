@@ -7,8 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssafy.happyhouse.mapper.favoriteMapper;
 import com.ssafy.happyhouse.model.HouseDto;
+import com.ssafy.happyhouse.model.mapper.favoriteMapper;
 
 @Service
 public class favoriteServiceImpl implements favoriteService {

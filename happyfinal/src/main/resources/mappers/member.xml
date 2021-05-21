@@ -2,26 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 주석 사용 가능  namespace 설정 중요-->
-<mapper namespace="com.ssafy.happyhouse.mapper.MemberMapper">
+<mapper namespace="com.ssafy.happyhouse.model.mapper.MemberMapper">
 	
-	<insert id="registerMember" parameterType="member">
+	<insert id="registerMember" parameterType="memberDto">
 		insert into member(userid,userName,userpwd,email,address) 
 		values(#{userId},#{userName},#{userPwd},#{email},#{address})
 	</insert>
 	
 	
-	<select id="login" parameterType="map" resultType="member">
+	<select id="login" parameterType="map" resultType="memberDto">
 		select username, userid, email
 		from member
 		where userid = #{login_id} and userpwd = #{login_pw}
 	</select>
 	
-	<select id="getMember" parameterType="String" resultType="member">
+	<select id="getMember" parameterType="String" resultType="memberDto">
 		select * from member
 		where userid=#{userId}
 	
 	</select>
-	<update id="modifyMember" parameterType="member">
+	<update id="modifyMember" parameterType="memberDto">
 		update member set 
 		userPwd=#{userPwd},
 		userName=#{userName},

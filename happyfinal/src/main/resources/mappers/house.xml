@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ssafy.happyhouse.mapper.HouseMapper">
+<mapper namespace="com.ssafy.happyhouse.model.mapper.HouseMapper">
 
-	<select id="getHouseList" parameterType="map" resultType="house">
+	<select id="getHouseList" parameterType="map" resultType="houseDto">
 		select * from houseinfo
 		where dong = #{mydong}
 	</select>
 	
-	<select id="getAptList" parameterType="String" resultType="house">
+	<select id="getAptList" parameterType="String" resultType="houseDto">
 		select no,AptName, dealAmount as price, dong, area
 		 from housedeal
 		where AptName LIKE #{aptName}

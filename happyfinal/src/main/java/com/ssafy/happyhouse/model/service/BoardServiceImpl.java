@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ssafy.happyhouse.mapper.AddressMapper;
-import com.ssafy.happyhouse.mapper.BoardMapper;
 import com.ssafy.happyhouse.model.BoardDto;
+import com.ssafy.happyhouse.model.mapper.AddressMapper;
+import com.ssafy.happyhouse.model.mapper.BoardMapper;
 
 
 @Service
