@@ -16,6 +16,7 @@
 		where userid = #{login_id} and userpwd = #{login_pw}
 	</select>
 	
+	
 	<select id="getMember" parameterType="String" resultType="memberDto">
 		select * from member
 		where userid=#{userId}
