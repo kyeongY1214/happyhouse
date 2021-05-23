@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.mapper.FavoriteMapper">
+
+	<insert id="setFavoriteList" parameterType="map">
+		insert into favorite (userid, city, dong, gugun)
+		values(#{userid},#{mycity},#{mydong},#{mygu})
+	</insert>
+	
+	<select id="getFavoriteList" parameterType="String" resultType="houseDto">
+		select no,AptName, dealAmount as price, dong, area
+		 from favorite as f
+		 left join houseinfo as h
+		 on f.dong = h.dong
+		where userid = #{userid}
+	</select>
+</mapper>
