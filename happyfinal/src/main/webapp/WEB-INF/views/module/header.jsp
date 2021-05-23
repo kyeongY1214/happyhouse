@@ -60,7 +60,7 @@ MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 						url : '${root}/address/getdong', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
 						method : 'post',
 						contentType : 'application/json;charset=utf-8',
-						dataType:'json',
+						dataType : 'json',
 						data : citygu,
 						success : function(donglist) { //DB접근 후 가져온 데이터
 							var list = '';
@@ -87,6 +87,11 @@ MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 	$(document).ready(function() {
 		$('#house-search').click(function() {
 			$("#cify-form").attr("action", "${root}/house/search");
+			document.getElementById("cify-form").submit();
+		});
+		
+		$('#favorite-regist').click(function() {
+			$("#cify-form").attr("action", "${root}/member/fregist");
 			document.getElementById("cify-form").submit();
 		});
 	});
@@ -143,12 +148,19 @@ MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 		<!-- Links -->
 		<div class="container">
 			<ul class="navbar-nav">
-			<li class="nav-item"><a class="nav-link"
+				<li class="nav-item"><a class="nav-link"
 					href="${root}/member/mvboard">게시판</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${root}/notice/list?pg=1&key=&word=">공지사항</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="https://news.google.com/topstories?hl=ko&gl=KR&ceid=KR:ko">오늘의뉴스</a></li>
+				
+				<%
+					if (memberDto != null && memberDto.getUserId().equals("admin")) {
+				%>
+					<li class="nav-item"><a class="nav-link"
+					href="${root}/member/list">회원목록</a></li>
+				<% } %>
 				<%-- <li class="nav-item"><a class="nav-link" href="<%=root%>/main?act=mvfavorite">관심지역등록</a></li> --%>
 			</ul>
 			<div>
