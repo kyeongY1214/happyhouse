@@ -35,6 +35,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+
 <script>
 	$(function() {
 		$("#facity").change(
@@ -96,6 +97,9 @@
 	})
 </script>
 
+
+
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#house-summit').click(function() {
@@ -109,49 +113,93 @@
 <body>
 	<%@ include file="./module/header.jsp"%>
 	<!-- 상단 Header End  -->
+	
+	<div class="container">
+		<div style="height: 60px;"></div>
+		<!-- 중앙 contents start -->
+		<div class="row">
+			<!-- 중앙 center contents start -->
+			<div class="col-md-12">
+				<!-- 지도 Section Start  -->
+				<div class="container">
+					<div id="map" style="max-width: 1200px; height: 500px;"></div>
+					<script type="text/javascript"
+						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eb94e0a165fada25939d9bf736b9992f"></script>
+					<script>
+						var container = document.getElementById('map');
+
+						var jsonarray = new Array();
+						
+						var index=0;
+						var positions= [];
+						<c:forEach var="house" items="${houseList}">
+							if(index==0){
+								var options = {
+										center : new kakao.maps.LatLng(${house.lat}, ${house.lng}),
+										level : 6
+									};
+								index++;
+							}
+							var data = {
+									content : '<div>${{house.aptName}}</div>',
+									latlng : new kakao.maps.LatLng(${house.lat}, ${house.lng})
+							}
+							console.log(data);
+							positions.push(data);
+						</c:forEach>
+					
+						var map = new kakao.maps.Map(container, options);
+
+						var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+					   
+						for (var i = 0; i < positions.length; i ++) {
+
+						    // 마커 이미지의 이미지 크기 입니다
+						    var imageSize = new kakao.maps.Size(24, 35); 
+						    
+						    // 마커 이미지를 생성합니다    
+						    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+						    
+						    var infowindow = new kakao.maps.InfoWindow({
+						        content: positions[i].content // 인포윈도우에 표시할 내용
+						    });
+						    
+						    // 마커를 생성합니다
+						    var marker = new kakao.maps.Marker({
+						        map: map, // 마커를 표시할 지도
+						        position: positions[i].latlng, // 마커를 표시할 위치
+						        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+						        image : markerImage // 마커 이미지 
+						    });
+						    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+						    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+						}
+						
+						
+						// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+						function makeOverListener(map, marker, infowindow) {
+						    return function() {
+						        infowindow.open(map, marker);
+						    };
+						}
+
+						// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+						function makeOutListener(infowindow) {
+						    return function() {
+						        infowindow.close();
+						    };
+						}
+					</script>
+				</div>
+
+			</div>
+			<div style="height: 40px;"></div>
+			<!-- 중앙 contents end -->
+		</div>
+	
+	
 	<section style="font-family:Jal_Onuel;">
 		<div class="container pt-5" align="center">
-			<div class="container" align="center">
-				<h2>관심지역등록</h2>
-			</div>
-			<div class="container">
-				<div>
-					<form class="form-inline" id="facity-form" method="post" action="">
-						<!-- <input type="hidden" id="code"  name="code" value="code"/> -->
-						<div class="form-group md">
-							<select class="form-control btn btn-secondary" name="facity"
-								id="facity">
-								<option value="" selected>도/광역시</option>
-								<option value="서울특별시" class="city-option">서울특별시</option>
-							</select>
-						</div>
-						<div class="form-group md-1">
-							<select class="form-control btn btn-secondary" name="fagu"
-								id="fagu">
-								<option value="">시/구/군</option>
-								<c:forEach var="guguns" items="${list}" varStatus="status">
-									<option value="${item}">${item}</option>
-								</c:forEach>
-							</select>
-						</div>
-						<div class="form-group md-1">
-							<select class="form-control btn btn-secondary" name="fadong"
-								id="fadong">
-								<option value="">동</option>
-								<c:forEach var="d" items="${dong}">
-									<option value="${d}" class="dong-option">${d}</option>
-								</c:forEach>
-							</select>
-						</div>
-						<div style="margin: 5px;">
-							<button type="button" class="btn-search btn btn-primary"
-								id="house-summit">등록</button>
-						</div>
-					</form>
-
-				</div>
-			</div>
-			<div>
 				<c:if test="${houseList.size() == 0}">
 					<div>관심지역을 등록해주세요.</div>
 				</c:if>

@@ -65,11 +65,7 @@
 						marker.setMap(map);
 					</script>
 				</div>
-				<!-- 프로그래밍 Section End  -->
-				<!-- 에세이 Section Start  -->
 
-
-				<!-- 에세이 Section End  -->
 				<div class="row mt-5">
 					<!-- 인기글 Article Start  -->
 					<div class="col-md-6">

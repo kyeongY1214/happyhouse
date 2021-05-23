@@ -10,7 +10,7 @@
 	</insert>
 	
 	<select id="getFavoriteList" parameterType="String" resultType="houseDto">
-		select no,AptName, dealAmount as price, dong, area
+		select no,AptName, f.dong, lat,lng
 		 from favorite as f
 		 left join houseinfo as h
 		 on f.dong = h.dong

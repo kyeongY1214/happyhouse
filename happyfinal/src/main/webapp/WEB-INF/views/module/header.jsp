@@ -89,9 +89,9 @@ MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 			$("#cify-form").attr("action", "${root}/house/search");
 			document.getElementById("cify-form").submit();
 		});
-		
+
 		$('#fav-regist').click(function() {
-			$("#cify-form").attr("action", "${root}/house/regist");
+			$("#cify-form").attr("action", "${root}/favorite/regist");
 			document.getElementById("cify-form").submit();
 		});
 	});
@@ -154,13 +154,25 @@ MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 					href="${root}/notice/list?pg=1&key=&word=">공지사항</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="https://news.google.com/topstories?hl=ko&gl=KR&ceid=KR:ko">오늘의뉴스</a></li>
-				
+
+				<%
+					if (memberDto != null) {
+				%>
+				<li class="nav-item"><a class="nav-link"
+					href="${root}/favorite/mvfav">관심지역</a></li>
+				<%
+					}
+				%>
+
+
 				<%
 					if (memberDto != null && memberDto.getUserId().equals("admin")) {
 				%>
-					<li class="nav-item"><a class="nav-link"
+				<li class="nav-item"><a class="nav-link"
 					href="${root}/member/list">회원목록</a></li>
-				<% } %>
+				<%
+					}
+				%>
 				<%-- <li class="nav-item"><a class="nav-link" href="<%=root%>/main?act=mvfavorite">관심지역등록</a></li> --%>
 			</ul>
 			<div>
