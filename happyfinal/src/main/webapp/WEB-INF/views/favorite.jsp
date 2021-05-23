@@ -9,11 +9,14 @@
 <head>
 <style>
 @font-face {
-    font-family: 'Jal_Onuel';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Jal_Onuel.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}</style>
+	font-family: 'Jal_Onuel';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Jal_Onuel.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+</style>
 <meta charset="UTF-8" />
 <title>Happy House</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -113,7 +116,7 @@
 <body>
 	<%@ include file="./module/header.jsp"%>
 	<!-- 상단 Header End  -->
-	
+
 	<div class="container">
 		<div style="height: 60px;"></div>
 		<!-- 중앙 contents start -->
@@ -196,26 +199,32 @@
 			<div style="height: 40px;"></div>
 			<!-- 중앙 contents end -->
 		</div>
-	
-	
-	<section style="font-family:Jal_Onuel;">
-		<div class="container pt-5" align="center">
+
+
+		<section style="font-family: Jal_Onuel;">
+			<div class="container pt-5" align="center">
 				<c:if test="${houseList.size() == 0}">
 					<div>관심지역을 등록해주세요.</div>
 				</c:if>
 				<c:if test="${houseList.size() != 0}">
 					<div>
-						<c:forEach var="houseVo" items="${houseList}" varStatus="status">
+						<c:forEach var="house" items="${houseList}" varStatus="status">
 							<table class="table table-active">
 								<tbody>
 									<tr class="table-info">
-										<td>${houseVo.aptName}</td>
+										<td>이름:
+											<p id=name>${house.aptName}</p>
+										</td>
 									</tr>
 									<tr>
-										<td>${houseVo.gugun}</td>
+										<td>lat:</td>
+										<td>${house.lat}</td>
 									</tr>
 									<tr>
-										<td>${houseVo.dong}</td>
+										<td>lng:${house.lng}</td>
+									</tr>
+									<tr>
+										<td><a href="${root}/house/${house.aptName}">상세보기</a></td>
 									</tr>
 								</tbody>
 							</table>
@@ -223,7 +232,7 @@
 					</div>
 				</c:if>
 			</div>
-		</div>
+	</div>
 	</section>
 	<!-- 하단 Footer Start  -->
 	<%@ include file="./module/footer.jsp"%>
