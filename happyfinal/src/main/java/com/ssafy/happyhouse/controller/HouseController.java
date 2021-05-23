@@ -29,25 +29,13 @@ public class HouseController {
 	
 	@Autowired
 	HouseService houseService;
-	
-	@Autowired
-	FavoriteService favoriteService;
-	
+
 	
 	@PostMapping("/search")
 	public String search(@RequestParam Map<String, String> map, Model model) throws SQLException{
 		List<HouseDto> list = houseService.getHouseList(map);
 		model.addAttribute("houseList", list);
 		return "searchHouse";
-	}
-	
-	@PostMapping("/regist")
-	public String regist(@RequestParam Map<String, String> map, HttpSession session, Model model) throws SQLException{
-		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-		map.put("userid", memberDto.getUserId());
-		favoriteService.setFavoriteList(map);
-		System.out.println(map.toString());
-		return "main";
 	}
 	
 	@GetMapping("/{aptName}")

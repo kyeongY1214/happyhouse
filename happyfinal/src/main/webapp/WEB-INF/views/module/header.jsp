@@ -90,13 +90,8 @@ MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 			document.getElementById("cify-form").submit();
 		});
 		
-<<<<<<< HEAD
 		$('#fav-regist').click(function() {
 			$("#cify-form").attr("action", "${root}/house/regist");
-=======
-		$('#favorite-regist').click(function() {
-			$("#cify-form").attr("action", "${root}/member/fregist");
->>>>>>> branch 'master' of https://lab.ssafy.com/ykh1214/happyhouse_final.git
 			document.getElementById("cify-form").submit();
 		});
 	});
