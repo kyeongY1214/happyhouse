@@ -37,4 +37,15 @@
 		where userid=#{info_id}
 		cascade
 	</delete>
+	
+	<delete id="userDelete" parameterType="String">
+		delete from member
+		where userid = #{userid}
+	</delete>
+	
+	<select id="userList" resultType="memberDto">
+		select userid, userpwd, username, email, address, date_format(joindate, '%y.%m.%d') joindate
+		from member
+		order by joindate desc;
+	</select>
 </mapper>

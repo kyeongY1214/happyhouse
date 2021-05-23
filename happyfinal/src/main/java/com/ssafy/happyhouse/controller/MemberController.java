@@ -1,6 +1,7 @@
 package com.ssafy.happyhouse.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.ssafy.happyhouse.model.HouseDto;
 import com.ssafy.happyhouse.model.MemberDto;
 import com.ssafy.happyhouse.model.service.MemberService;
 
@@ -88,16 +91,13 @@ public class MemberController {
 	@PostMapping("/delete")
 	public String delmember(@RequestParam Map<String, String> map, Model model,HttpSession session)
 	{
-		try {
-			memberservice.deleteMember(map);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		memberservice.deleteMember(map);
 		session.invalidate();
 		return "main";
 	}
-	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String list() {
+		return "userlist";
+	}
 	
 }

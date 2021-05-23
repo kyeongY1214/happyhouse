@@ -90,8 +90,13 @@ MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 			document.getElementById("cify-form").submit();
 		});
 		
+<<<<<<< HEAD
 		$('#fav-regist').click(function() {
 			$("#cify-form").attr("action", "${root}/house/regist");
+=======
+		$('#favorite-regist').click(function() {
+			$("#cify-form").attr("action", "${root}/member/fregist");
+>>>>>>> branch 'master' of https://lab.ssafy.com/ykh1214/happyhouse_final.git
 			document.getElementById("cify-form").submit();
 		});
 	});
@@ -154,6 +159,13 @@ MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 					href="${root}/notice/list?pg=1&key=&word=">공지사항</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="https://news.google.com/topstories?hl=ko&gl=KR&ceid=KR:ko">오늘의뉴스</a></li>
+				
+				<%
+					if (memberDto != null && memberDto.getUserId().equals("admin")) {
+				%>
+					<li class="nav-item"><a class="nav-link"
+					href="${root}/member/list">회원목록</a></li>
+				<% } %>
 				<%-- <li class="nav-item"><a class="nav-link" href="<%=root%>/main?act=mvfavorite">관심지역등록</a></li> --%>
 			</ul>
 			<div>

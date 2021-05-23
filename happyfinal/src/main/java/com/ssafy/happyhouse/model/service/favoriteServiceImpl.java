@@ -2,30 +2,30 @@ package com.ssafy.happyhouse.model.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.happyhouse.model.HouseDto;
-import com.ssafy.happyhouse.model.mapper.FavoriteMapper;
+import com.ssafy.happyhouse.model.mapper.favoriteMapper;
 
 @Service
-public class FavoriteServiceImpl implements FavoriteService {
+public class favoriteServiceImpl implements favoriteService {
 	
 	@Autowired
 	SqlSession sqlsession;
 	
-	
-	
 	@Override
 	public ArrayList<HouseDto> getFavoriteList(String userid) throws SQLException {
-		return  sqlsession.getMapper(FavoriteMapper.class).getFavoriteList(userid);
+		return null;
 	}
 
 	@Override
-	public void setFavoriteList(Map<String, String> map) throws SQLException {
-		sqlsession.getMapper(FavoriteMapper.class).setFavoriteList(map);		
+	public void setFavoriteList(String userid, String city, String dong, String gugun) throws SQLException {
+		
 	}
+	
+	
+
 }
