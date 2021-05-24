@@ -40,6 +40,13 @@ public class AddressController {
 		return donglist;
 	}
 	
+	@RequestMapping(value = "/getkind", method = RequestMethod.POST, headers = { "Content-type=application/json;charset=utf-8" })
+	public List<String> getKind(@RequestBody Map<String, String> map) throws SQLException {
+		List<String> kindlist = addressServiceImpl.getKind(map);
+		System.out.println(map.toString());
+		System.out.println(kindlist.toString());
+		return kindlist;
+	}
 	
 
 }

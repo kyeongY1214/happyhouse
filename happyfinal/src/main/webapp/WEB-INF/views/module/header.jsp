@@ -154,6 +154,8 @@ MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 					href="${root}/notice/list?pg=1&key=&word=">공지사항</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="https://news.google.com/topstories?hl=ko&gl=KR&ceid=KR:ko">오늘의뉴스</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="${root}/retail/mvretail">주변상권정보</a></li>
 
 				<%
 					if (memberDto != null) {

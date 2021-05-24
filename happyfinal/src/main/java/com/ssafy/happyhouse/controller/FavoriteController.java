@@ -42,7 +42,7 @@ public class FavoriteController {
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 		List<HouseDto> list = favoriteService.getFavoriteList(memberDto.getUserId());
 		List<HospitalDto> hospital = hospitalService.getHosiptal(memberDto.getUserId());
-		System.out.println(hospital.toString());
+
 		model.addAttribute("houseList", list);
 		model.addAttribute("hospitalList", hospital);
 		return "favorite";

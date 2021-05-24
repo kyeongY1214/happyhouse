@@ -8,11 +8,14 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-
 @Mapper
 public interface AddressMapper {
-	
-	List<String> getCity(String city)throws SQLException ;
-	List<String> getGugun(String city)throws SQLException ;
-	List<String> getDong(Map<String, String> map)throws SQLException ;	
+
+	List<String> getCity(String city) throws SQLException;
+
+	List<String> getGugun(String city) throws SQLException;
+
+	List<String> getDong(Map<String, String> map) throws SQLException;
+
+	List<String> getKind(Map<String, String> map) throws SQLException;
 }

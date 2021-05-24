@@ -14,36 +14,41 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.happyhouse.model.MemberDto;
+import com.ssafy.happyhouse.model.RetailDto;
 import com.ssafy.happyhouse.model.HouseDto;
 import com.ssafy.happyhouse.model.service.HouseService;
 import com.ssafy.happyhouse.model.service.MemberService;
+import com.ssafy.happyhouse.model.service.RetailService;
+import com.ssafy.happyhouse.model.service.AddressService;
 import com.ssafy.happyhouse.model.service.FavoriteService;
 
 @Controller
-@RequestMapping("/house")
-public class HouseController {
+@RequestMapping("/retail")
+public class RetailController {
+
+
+	@RequestMapping("/mvretail")
+	public String mvsearch(@RequestParam Map<String, String> map, Model model) throws SQLException{
+		return "searchRetail";
+	}
 	
 	@Autowired
-	HouseService houseService;
+	RetailService retailService;
 
 	
 	@PostMapping("/search")
 	public String search(@RequestParam Map<String, String> map, Model model) throws SQLException{
-		List<HouseDto> list = houseService.getHouseList(map);
-		model.addAttribute("houseList", list);
-		return "searchHouse";
-	}
-	
-	@GetMapping("/{aptName}")
-	public String search(@PathVariable("aptName") String aptName, Model model) throws SQLException{
-		List<HouseDto> list = houseService.getAptList(aptName);
-		model.addAttribute("aptList", list);
+		List<RetailDto> list = retailService.getRetail(map);
+		model.addAttribute("retailList", list);
 		System.out.println(list.toString());
-		return "searchApt";
+		return "searchRetail";
 	}
 	
 }
