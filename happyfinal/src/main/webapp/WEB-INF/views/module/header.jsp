@@ -136,7 +136,7 @@ MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 		style="background-image: url(<%=root%>/img/apart.jpg); background-repeat: no-repeat; background-size: cover; background-position: center;">
 		<div class="container">
 			<h1 style="">
-				<a href="${root}"
+				<a href="${root}/"
 					style="color: black; text-decoration: none; text-decoration: none;">Happy
 					House</a>
 			</h1>

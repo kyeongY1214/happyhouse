@@ -16,6 +16,18 @@
 	font-weight: normal;
 	font-style: normal;
 }
+div.left {
+	width: 50%;
+	float: left;
+	box-sizing: border-box;
+}
+
+div.right {
+	width: 50%;
+	float: right;
+	box-sizing: border-box;
+}
+
 </style>
 <head>
 <meta charset="UTF-8" />
@@ -138,6 +150,8 @@
 	});
 </script>
 
+
+
 </head>
 
 
@@ -221,7 +235,7 @@
 							};
 						<c:forEach var="retail" items="${retailList}">
 							var data = {
-									content : '<div>${{retail.name}}</div>',
+									content : '<div><ul><li>이름 : ${retail.name}</br></li><li>상세 : ${retail.detail}</br></li><li>${retail.address}</br></br></li></ul></div>',
 									latlng : new kakao.maps.LatLng(${retail.lng}, ${retail.lat})
 							}
 							console.log(data);
