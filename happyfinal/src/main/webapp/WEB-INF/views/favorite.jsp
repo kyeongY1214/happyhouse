@@ -212,10 +212,33 @@
 							<table class="table table-active">
 								<tbody>
 									<tr class="table-info">
-										<td>이름:<p id=name>${house.aptName}</p></td>
+										<td>이름:${house.aptName}</p></td>
 									</tr>
 									<tr>
 										<td><a href="${root}/house/${house.aptName}">상세보기</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</c:forEach>
+					</div>
+				</c:if>
+				
+				<c:if test="${hospitalList.size() == 0}">
+					<div>관심지역을 등록해주세요.</div>
+				</c:if>
+				<c:if test="${hospitalList.size() != 0}">
+					<div>
+						<c:forEach var="hospital" items="${hospitalList}" varStatus="status">
+							<table class="table table-active">
+								<tbody>
+									<tr>
+										<td>이름:${hospital.name}</p></td>
+									</tr>
+									<tr>
+										<td>주소:${hospital.address}</p></td>
+									</tr>
+									<tr>
+										<td>전화번호:${hospital.tel}</p></td>
 									</tr>
 								</tbody>
 							</table>

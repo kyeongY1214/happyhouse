@@ -30,14 +30,6 @@ public class HouseController {
 	@Autowired
 	HouseService houseService;
 
-	
-	@PostMapping("/search")
-	public String search(@RequestParam Map<String, String> map, Model model) throws SQLException{
-		List<HouseDto> list = houseService.getHouseList(map);
-		model.addAttribute("houseList", list);
-		return "searchHouse";
-	}
-	
 	@GetMapping("/{aptName}")
 	public String search(@PathVariable("aptName") String aptName, Model model) throws SQLException{
 		List<HouseDto> list = houseService.getAptList(aptName);

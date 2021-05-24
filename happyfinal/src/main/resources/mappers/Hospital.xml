@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.ssafy.happyhouse.model.mapper.HospitalMapper">
+	<select id="getHosiptal" parameterType="String"
+		resultType="hospitalDto">
+		select sido, gu, name, address, schedule_week, schedule_sat, schedule_sun, tel
+		from corona as c
+		right join favorite as f
+		on f.gugun = c.gu and f.userid=#{userid};
+	</select>
+</mapper>
