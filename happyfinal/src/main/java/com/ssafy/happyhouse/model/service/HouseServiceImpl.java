@@ -21,8 +21,8 @@ public class HouseServiceImpl implements HouseService {
 	SqlSession sqlsession;
 
 	@Override
-	public ArrayList<HouseDto> getHouseList(Map<String, String> map) throws SQLException {
-		return sqlsession.getMapper(HouseMapper.class).getHouseList(map);
+	public ArrayList<HouseDto> getHouseList(String mydong) throws SQLException {
+		return sqlsession.getMapper(HouseMapper.class).getHouseList(mydong);
 	}
 
 	@Override

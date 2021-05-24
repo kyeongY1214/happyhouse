@@ -4,7 +4,7 @@
 
 <mapper namespace="com.ssafy.happyhouse.model.mapper.HouseMapper">
 
-	<select id="getHouseList" parameterType="map"
+	<select id="getHouseList" parameterType="String"
 		resultType="houseDto">
 		select * from houseinfo
 		where dong = #{mydong}

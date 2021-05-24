@@ -33,7 +33,15 @@ public class HouseController {
 	
 	@PostMapping("/search")
 	public String search(@RequestParam Map<String, String> map, Model model) throws SQLException{
-		List<HouseDto> list = houseService.getHouseList(map);
+		String dong = map.get("mydong");
+		List<HouseDto> list = houseService.getHouseList(dong);
+		model.addAttribute("houseList", list);
+		return "searchHouse";
+	}
+	
+	@GetMapping("/search/{dong}")
+	public String searchList(@PathVariable("dong") String dong, Model model) throws SQLException{
+		List<HouseDto> list = houseService.getHouseList(dong);
 		model.addAttribute("houseList", list);
 		return "searchHouse";
 	}
