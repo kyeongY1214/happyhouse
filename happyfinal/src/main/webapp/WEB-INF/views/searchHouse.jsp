@@ -129,16 +129,7 @@
 				<table class="table table-active">
 					<tbody>
 						<tr class="table-info">
-							<td>이름:
-								<p id=name>${house.aptName}</p>
-							</td>
-						</tr>
-						<tr>
-							<td>lat:</td>
-							<td>${house.lat}</td>
-						</tr>
-						<tr>
-							<td>lng:${house.lng}</td>
+							<td>이름 : ${house.aptName}</td>
 						</tr>
 						<tr>
 							<td><a href="${root}/house/${house.aptName}">상세보기</a></td>
