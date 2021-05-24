@@ -16,6 +16,18 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
+div.left {
+	width: 50%;
+	float: left;
+	box-sizing: border-box;
+}
+
+div.right {
+	width: 50%;
+	float: right;
+	box-sizing: border-box;
+}
 </style>
 <meta charset="UTF-8" />
 <title>Happy House</title>
@@ -202,7 +214,8 @@
 
 
 		<section style="font-family: Jal_Onuel;">
-			<div class="container pt-5" align="center">
+			<div class="left container pt-5" align="center">
+			관심 매물
 				<c:if test="${houseList.size() == 0}">
 					<div>관심지역을 등록해주세요.</div>
 				</c:if>
@@ -212,7 +225,9 @@
 							<table class="table table-active">
 								<tbody>
 									<tr class="table-info">
-										<td>이름:${house.aptName}</p></td>
+										<td>이름:${house.aptName}
+											</p>
+										</td>
 									</tr>
 									<tr>
 										<td><a href="${root}/house/${house.aptName}">상세보기</a></td>
@@ -222,29 +237,39 @@
 						</c:forEach>
 					</div>
 				</c:if>
-				
-				<c:if test="${hospitalList.size() == 0}">
-					<div>관심지역을 등록해주세요.</div>
-				</c:if>
-				<c:if test="${hospitalList.size() != 0}">
-					<div>
-						<c:forEach var="hospital" items="${hospitalList}" varStatus="status">
-							<table class="table table-active">
-								<tbody>
-									<tr>
-										<td>이름:${hospital.name}</p></td>
-									</tr>
-									<tr>
-										<td>주소:${hospital.address}</p></td>
-									</tr>
-									<tr>
-										<td>전화번호:${hospital.tel}</p></td>
-									</tr>
-								</tbody>
-							</table>
-						</c:forEach>
-					</div>
-				</c:if>
+				</div>
+				<div class="right container pt-5" align="center">
+				근처 코로나 진료소
+					<c:if test="${hospitalList.size() == 0}">
+						<div>관심지역을 등록해주세요.</div>
+					</c:if>
+					<c:if test="${hospitalList.size() != 0}">
+						<div>
+							<c:forEach var="hospital" items="${hospitalList}"
+								varStatus="status">
+								<table class="table table-active">
+									<tbody>
+										<tr>
+											<td>이름:${hospital.name}
+												</p>
+											</td>
+										</tr>
+										<tr>
+											<td>주소:${hospital.address}
+												</p>
+											</td>
+										</tr>
+										<tr>
+											<td>전화번호:${hospital.tel}
+												</p>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</c:forEach>
+						</div>
+					</c:if>
+				</div>
 			</div>
 	</div>
 	</section>
