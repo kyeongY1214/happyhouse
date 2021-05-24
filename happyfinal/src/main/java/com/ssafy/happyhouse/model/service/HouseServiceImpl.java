@@ -39,4 +39,14 @@ public class HouseServiceImpl implements HouseService {
 		return sqlsession.getMapper(HouseMapper.class).lowchartList();
 	}
 
+	@Override
+	public List<HouseDto> guhiList(String gugun) throws SQLException {
+		return sqlsession.getMapper(HouseMapper.class).guhiList(gugun);
+	}
+
+	@Override
+	public List<HouseDto> gulowList(String gugun) throws SQLException {
+		return sqlsession.getMapper(HouseMapper.class).gulowList(gugun);
+	}
+
 }

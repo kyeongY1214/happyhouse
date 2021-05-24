@@ -20,5 +20,7 @@ public interface HouseMapper {
 
 	List<HouseDto> lowchartList() throws SQLException;
 	
+	List<HouseDto> guhiList(String gugun) throws SQLException;
 
+	List<HouseDto> gulowList(String gugun) throws SQLException;
 }

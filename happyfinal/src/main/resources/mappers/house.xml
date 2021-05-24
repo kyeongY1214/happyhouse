@@ -4,30 +4,53 @@
 
 <mapper namespace="com.ssafy.happyhouse.model.mapper.HouseMapper">
 
-	<select id="getHouseList" parameterType="map" resultType="houseDto">
+	<select id="getHouseList" parameterType="map"
+		resultType="houseDto">
 		select * from houseinfo
 		where dong = #{mydong}
 	</select>
-	
-	<select id="getAptList" parameterType="String" resultType="houseDto">
+
+	<select id="getAptList" parameterType="String"
+		resultType="houseDto">
 		select no,AptName, dealAmount as price, dong, area
-		 from housedeal
+		from housedeal
 		where AptName LIKE #{aptName}
 	</select>
-	
-	<select id="chartList"  resultType="houseDto">
-		select dong, avg(cast(dealAmount as unsigned )) as price
-		from  housedeal
+
+	<select id="chartList" resultType="houseDto">
+		select dong,
+		avg(cast(dealAmount as unsigned )) as price
+		from housedeal
 		group by dong
 		order by avg(dealAmount) desc limit 5
 	</select>
-	
-	
-	<select id="lowchartList"  resultType="houseDto">
-		select dong, avg(cast(dealAmount as unsigned )) as price
-		from  housedeal
+
+
+	<select id="lowchartList" resultType="houseDto">
+		select dong,
+		avg(cast(dealAmount as unsigned )) as price
+		from housedeal
 		group by dong
 		order by avg(dealAmount) limit 5
 	</select>
-	
+
+	<select id="guhiList" parameterType="String" resultType="houseDto">
+		select h.dong, avg(cast(dealAmount as unsigned )) as price
+		FROM happyhouse.housedeal as h join happyhouse.dongcode as d
+		on h.dong = d. dong
+		where d.gugun = #{gugun}
+		group by h.dong
+		order by price desc limit 5
+	</select>
+
+	<select id="gulowList" parameterType="String" resultType="houseDto">
+		select h.dong, avg(cast(dealAmount as unsigned )) as price
+		FROM happyhouse.housedeal as h join happyhouse.dongcode as d
+		on h.dong = d. dong
+		where d.gugun = #{gugun}
+		group by h.dong
+		order by price limit 5
+	</select>
+
+
 </mapper>
