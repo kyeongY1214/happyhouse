@@ -33,4 +33,9 @@ public class AddressServiceImpl implements AddressService {
 		return sqlsession.getMapper(AddressMapper.class).getDong(map);
 	}
 
+	@Override
+	public List<String> getKind(Map<String, String> map) throws SQLException {
+		return sqlsession.getMapper(AddressMapper.class).getKind(map);
+	}
+
 }

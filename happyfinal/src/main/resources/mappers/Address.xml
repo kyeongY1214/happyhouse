@@ -9,6 +9,12 @@
 		where city=#{city} AND gugun=#{gu}
 	</select>
 	
+	<select id ="getKind" parameterType="map" resultType="String">
+		SELECT distinct kind 
+		FROM retail 
+		where dong=#{dong}
+	</select>
+	
 	<select id ="getGugun" parameterType="String" resultType="String">
 		SELECT distinct gugun 
 		FROM dongcode 
