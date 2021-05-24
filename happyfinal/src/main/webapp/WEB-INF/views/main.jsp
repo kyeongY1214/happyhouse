@@ -34,174 +34,136 @@
 
 
 <script type="text/javascript">
+	$(document).ready(function() {
 
-$(document).ready(function() {
-	
+		$.ajax({
+			url : '${root}/chart/mkhichart',
+			type : 'GET',
+			contentType : 'application/json;charset=utf-8',
+			dataType : 'json',
+			success : function(datas) {
+				makehiChart(datas);
+			},
+			error : function(xhr, status, msg) {
+				console.log("상태값 : " + status + " Http에러메시지 : " + msg);
+			}
+		});
 
-	$.ajax({
-		url:'${root}/chart/mkhichart',  
-		type:'GET',
-		contentType:'application/json;charset=utf-8',
-		dataType:'json',
-		success:function(datas) {
-			makehiChart(datas);
-		},
-		error:function(xhr,status,msg){
-			console.log("상태값 : " + status + " Http에러메시지 : "+msg);
-		}
+		$.ajax({
+			url : '${root}/chart/mklowchart',
+			type : 'GET',
+			contentType : 'application/json;charset=utf-8',
+			dataType : 'json',
+			success : function(datas) {
+				makelowChart(datas);
+			},
+			error : function(xhr, status, msg) {
+				console.log("상태값 : " + status + " Http에러메시지 : " + msg);
+			}
+		});
 	});
-	
-	$.ajax({
-		url:'${root}/chart/mklowchart',  
-		type:'GET',
-		contentType:'application/json;charset=utf-8',
-		dataType:'json',
-		success:function(datas) {
-			makelowChart(datas);
-		},
-		error:function(xhr,status,msg){
-			console.log("상태값 : " + status + " Http에러메시지 : "+msg);
-		}
-	});
-});
-function makehiChart(datas){
-	var ctx = document.getElementById('myhiChart');
-	var arr= [, , , , ,  ];
-	var ti = [, , , , ,  ];
-	console.log(datas);
-	$(datas).each(function(index, data) {
-		console.log(data);
-		arr[index] = data.price;
-		ti[index] = data.dong;
-	});
-	
-	var myhiChart = new Chart(ctx,
-			{
-				type : 'bar',
-				data : {
-					labels :ti,
-					datasets : [ {
-						label : 'Top 5 Chart',
-						data : arr,
-						backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-								'rgba(54, 162, 235, 0.2)',
-								'rgba(255, 206, 86, 0.2)',
-								'rgba(75, 192, 192, 0.2)',
-								'rgba(153, 102, 255, 0.2)',
-								'rgba(255, 159, 64, 0.2)' ],
-						borderColor : [ 'rgba(255, 99, 132, 1)',
-								'rgba(54, 162, 235, 1)',
-								'rgba(255, 206, 86, 1)',
-								'rgba(75, 192, 192, 1)',
-								'rgba(153, 102, 255, 1)',
-								'rgba(255, 159, 64, 1)' ],
-						borderWidth : 1
+	function makehiChart(datas) {
+		var ctx = document.getElementById('myhiChart');
+		var arr = [ , , , , , ];
+		var ti = [ , , , , , ];
+		console.log(datas);
+		$(datas).each(function(index, data) {
+			console.log(data);
+			arr[index] = data.price;
+			ti[index] = data.dong;
+		});
+
+		var myhiChart = new Chart(ctx, {
+			type : 'bar',
+			data : {
+				labels : ti,
+				datasets : [ {
+					label : 'Top 5 Chart',
+					data : arr,
+					backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+							'rgba(54, 162, 235, 0.2)',
+							'rgba(255, 206, 86, 0.2)',
+							'rgba(75, 192, 192, 0.2)',
+							'rgba(153, 102, 255, 0.2)',
+							'rgba(255, 159, 64, 0.2)' ],
+					borderColor : [ 'rgba(255, 99, 132, 1)',
+							'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+							'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+							'rgba(255, 159, 64, 1)' ],
+					borderWidth : 1
+				} ]
+			},
+			options : {
+				scales : {
+					yAxes : [ {
+						ticks : {
+							beginAtZero : true
+						}
 					} ]
-				},
-				options : {
-					scales : {
-						yAxes : [ {
-							ticks : {
-								beginAtZero : true
-							}
-						} ]
-					}
 				}
-			});
-}
-function makelowChart(datas){
-	var ctx = document.getElementById('mylowChart');
-	var arr= [, , , , ,  ];
-	var ti = [, , , , ,  ];
-	console.log(datas);
-	$(datas).each(function(index, data) {
-		console.log(data);
-		arr[index] = data.price;
-		ti[index] = data.dong;
-	});
-	
-	var mylowChart = new Chart(ctx,
-			{
-				type : 'bar',
-				data : {
-					labels :ti,
-					datasets : [ {
-						label : 'Bottom 5 Chart',
-						data : arr,
-						backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-								'rgba(54, 162, 235, 0.2)',
-								'rgba(255, 206, 86, 0.2)',
-								'rgba(75, 192, 192, 0.2)',
-								'rgba(153, 102, 255, 0.2)',
-								'rgba(255, 159, 64, 0.2)' ],
-						borderColor : [ 'rgba(255, 99, 132, 1)',
-								'rgba(54, 162, 235, 1)',
-								'rgba(255, 206, 86, 1)',
-								'rgba(75, 192, 192, 1)',
-								'rgba(153, 102, 255, 1)',
-								'rgba(255, 159, 64, 1)' ],
-						borderWidth : 1
+			}
+		});
+	}
+	function makelowChart(datas) {
+		var ctx = document.getElementById('mylowChart');
+		var arr = [ , , , , , ];
+		var ti = [ , , , , , ];
+		console.log(datas);
+		$(datas).each(function(index, data) {
+			console.log(data);
+			arr[index] = data.price;
+			ti[index] = data.dong;
+		});
+
+		var mylowChart = new Chart(ctx, {
+			type : 'bar',
+			data : {
+				labels : ti,
+				datasets : [ {
+					label : 'Bottom 5 Chart',
+					data : arr,
+					backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+							'rgba(54, 162, 235, 0.2)',
+							'rgba(255, 206, 86, 0.2)',
+							'rgba(75, 192, 192, 0.2)',
+							'rgba(153, 102, 255, 0.2)',
+							'rgba(255, 159, 64, 0.2)' ],
+					borderColor : [ 'rgba(255, 99, 132, 1)',
+							'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+							'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+							'rgba(255, 159, 64, 1)' ],
+					borderWidth : 1
+				} ]
+			},
+			options : {
+				scales : {
+					yAxes : [ {
+						ticks : {
+							beginAtZero : true
+						}
 					} ]
-				},
-				options : {
-					scales : {
-						yAxes : [ {
-							ticks : {
-								beginAtZero : true
-							}
-						} ]
-					}
 				}
-			});
-}
+			}
+		});
+	}
 </script>
 </head>
 <body style="font-family: Jal_Onuel;">
-
-	
-
 	<%@ include file="./module/header.jsp"%>
 	<!-- 상단 Header End  -->
 	<div class="container">
+		<!-- 중앙 contents start -->
 		<div class="row">
+			<!-- 차트 Section Start  -->
 			<div class="col-md-6">
 				<canvas id="myhiChart"></canvas>
 			</div>
 			<div class="col-md-6">
 				<canvas id="mylowChart"></canvas>
 			</div>
-		</div>
-	</div>
-
-	<div class="container">
-		<div style="height: 60px;"></div>
-		<!-- 중앙 contents start -->
-		<div class="row">
+			
 			<!-- 중앙 center contents start -->
 			<div class="col-md-12">
-				<!-- 지도 Section Start  -->
-				<div class="container">
-					<div id="map" style="max-width: 1200px; height: 500px;"></div>
-					<script type="text/javascript"
-						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eb94e0a165fada25939d9bf736b9992f"></script>
-					<script>
-						var container = document.getElementById('map');
-						var options = {
-							center : new kakao.maps.LatLng(37.5915245479787,
-									126.9768010428442),
-							level : 6
-						};
-
-						var map = new kakao.maps.Map(container, options);
-						var markerPosition = new kakao.maps.LatLng(
-								37.5915245479787, 126.9768010428442);
-						var marker = new kakao.maps.Marker({
-							position : markerPosition
-						});
-						marker.setMap(map);
-					</script>
-				</div>
-
 				<div class="row mt-5">
 					<!-- 인기글 Article Start  -->
 					<div class="col-md-6">
@@ -268,7 +230,6 @@ function makelowChart(datas){
 				</div>
 			</div>
 			<!-- 중앙 center contents end -->
-
 		</div>
 		<div style="height: 40px;"></div>
 		<!-- 중앙 contents end -->
