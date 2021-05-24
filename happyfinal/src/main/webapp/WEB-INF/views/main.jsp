@@ -37,22 +37,35 @@
 
 $(document).ready(function() {
 	
-	//회원 목록
+
 	$.ajax({
-		url:'${root}/chart/mkchart',  
+		url:'${root}/chart/mkhichart',  
 		type:'GET',
 		contentType:'application/json;charset=utf-8',
 		dataType:'json',
 		success:function(datas) {
-			makeChart(datas);
+			makehiChart(datas);
+		},
+		error:function(xhr,status,msg){
+			console.log("상태값 : " + status + " Http에러메시지 : "+msg);
+		}
+	});
+	
+	$.ajax({
+		url:'${root}/chart/mklowchart',  
+		type:'GET',
+		contentType:'application/json;charset=utf-8',
+		dataType:'json',
+		success:function(datas) {
+			makelowChart(datas);
 		},
 		error:function(xhr,status,msg){
 			console.log("상태값 : " + status + " Http에러메시지 : "+msg);
 		}
 	});
 });
-function makeChart(datas){
-	var ctx = document.getElementById('myChart');
+function makehiChart(datas){
+	var ctx = document.getElementById('myhiChart');
 	var arr= [, , , , ,  ];
 	var ti = [, , , , ,  ];
 	console.log(datas);
@@ -62,13 +75,58 @@ function makeChart(datas){
 		ti[index] = data.dong;
 	});
 	
-	var myChart = new Chart(ctx,
+	var myhiChart = new Chart(ctx,
 			{
 				type : 'bar',
 				data : {
 					labels :ti,
 					datasets : [ {
-						label : '# of Votes',
+						label : 'Top 5 Chart',
+						data : arr,
+						backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+								'rgba(54, 162, 235, 0.2)',
+								'rgba(255, 206, 86, 0.2)',
+								'rgba(75, 192, 192, 0.2)',
+								'rgba(153, 102, 255, 0.2)',
+								'rgba(255, 159, 64, 0.2)' ],
+						borderColor : [ 'rgba(255, 99, 132, 1)',
+								'rgba(54, 162, 235, 1)',
+								'rgba(255, 206, 86, 1)',
+								'rgba(75, 192, 192, 1)',
+								'rgba(153, 102, 255, 1)',
+								'rgba(255, 159, 64, 1)' ],
+						borderWidth : 1
+					} ]
+				},
+				options : {
+					scales : {
+						yAxes : [ {
+							ticks : {
+								beginAtZero : true
+							}
+						} ]
+					}
+				}
+			});
+}
+function makelowChart(datas){
+	var ctx = document.getElementById('mylowChart');
+	var arr= [, , , , ,  ];
+	var ti = [, , , , ,  ];
+	console.log(datas);
+	$(datas).each(function(index, data) {
+		console.log(data);
+		arr[index] = data.price;
+		ti[index] = data.dong;
+	});
+	
+	var mylowChart = new Chart(ctx,
+			{
+				type : 'bar',
+				data : {
+					labels :ti,
+					datasets : [ {
+						label : 'Bottom 5 Chart',
 						data : arr,
 						backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
 								'rgba(54, 162, 235, 0.2)',
@@ -105,7 +163,14 @@ function makeChart(datas){
 	<%@ include file="./module/header.jsp"%>
 	<!-- 상단 Header End  -->
 	<div class="container">
-		<canvas id="myChart"></canvas>
+		<div class="row">
+			<div class="col-md-6">
+				<canvas id="myhiChart"></canvas>
+			</div>
+			<div class="col-md-6">
+				<canvas id="mylowChart"></canvas>
+			</div>
+		</div>
 	</div>
 
 	<div class="container">

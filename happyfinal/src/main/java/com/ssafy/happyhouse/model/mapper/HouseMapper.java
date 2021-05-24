@@ -17,6 +17,8 @@ public interface HouseMapper {
 	ArrayList<HouseDto> getAptList(String aptName) throws SQLException;//구군코드, 동이름, 아파트 이름
 
 	List<HouseDto> chartList() throws SQLException;
+
+	List<HouseDto> lowchartList() throws SQLException;
 	
 
 }

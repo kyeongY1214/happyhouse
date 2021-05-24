@@ -34,5 +34,9 @@ public class HouseServiceImpl implements HouseService {
 	public List<HouseDto> chartList() throws SQLException {
 		return sqlsession.getMapper(HouseMapper.class).chartList();
 	}
+	@Override
+	public List<HouseDto> lowchartList() throws SQLException {
+		return sqlsession.getMapper(HouseMapper.class).lowchartList();
+	}
 
 }

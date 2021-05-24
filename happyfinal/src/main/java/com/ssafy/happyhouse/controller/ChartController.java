@@ -21,9 +21,14 @@ public class ChartController {
 	@Autowired
 	private HouseService houseService;
 	
-	@RequestMapping(value = "/mkchart", method = RequestMethod.GET, headers = { "Content-type=application/json" })
+	@RequestMapping(value = "/mkhichart", method = RequestMethod.GET, headers = { "Content-type=application/json" })
 	public  List<HouseDto> chartList() throws SQLException {
 		return houseService.chartList();
+	}
+	
+	@RequestMapping(value = "/mklowchart", method = RequestMethod.GET, headers = { "Content-type=application/json" })
+	public  List<HouseDto> lowchartList() throws SQLException {
+		return houseService.lowchartList();
 	}
 	
 }

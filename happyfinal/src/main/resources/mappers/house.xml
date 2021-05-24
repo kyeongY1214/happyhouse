@@ -22,4 +22,11 @@
 		order by avg(dealAmount) desc limit 5
 	</select>
 	
+	<select id="lowchartList"  resultType="houseDto">
+		select dong, avg(cast(dealAmount as unsigned )) as price
+		from  housedeal
+		group by dong
+		order by avg(dealAmount) limit 5
+	</select>
+	
 </mapper>
