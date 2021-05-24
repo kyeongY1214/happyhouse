@@ -15,6 +15,11 @@
 		where AptName LIKE #{aptName}
 	</select>
 	
-	
+	<select id="chartList"  resultType="houseDto">
+		select dong, avg(cast(dealAmount as unsigned )) as price
+		from  housedeal
+		group by dong
+		order by avg(dealAmount) desc limit 5
+	</select>
 	
 </mapper>

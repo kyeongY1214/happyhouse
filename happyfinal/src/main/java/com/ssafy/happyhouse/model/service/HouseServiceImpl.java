@@ -2,6 +2,7 @@ package com.ssafy.happyhouse.model.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -27,6 +28,11 @@ public class HouseServiceImpl implements HouseService {
 	@Override
 	public ArrayList<HouseDto> getAptList(String aptName) throws SQLException {
 		return sqlsession.getMapper(HouseMapper.class).getAptList(aptName);
+	}
+
+	@Override
+	public List<HouseDto> chartList() throws SQLException {
+		return sqlsession.getMapper(HouseMapper.class).chartList();
 	}
 
 }

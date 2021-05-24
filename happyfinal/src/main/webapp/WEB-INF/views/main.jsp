@@ -29,13 +29,84 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="/wp-content/themes/Newspaper-child/assets/js/all.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+
 <script type="text/javascript">
 
+$(document).ready(function() {
+	
+	//회원 목록
+	$.ajax({
+		url:'${root}/chart/mkchart',  
+		type:'GET',
+		contentType:'application/json;charset=utf-8',
+		dataType:'json',
+		success:function(datas) {
+			makeChart(datas);
+		},
+		error:function(xhr,status,msg){
+			console.log("상태값 : " + status + " Http에러메시지 : "+msg);
+		}
+	});
+});
+function makeChart(datas){
+	var ctx = document.getElementById('myChart');
+	var arr= [, , , , ,  ];
+	var ti = [, , , , ,  ];
+	console.log(datas);
+	$(datas).each(function(index, data) {
+		console.log(data);
+		arr[index] = data.price;
+		ti[index] = data.dong;
+	});
+	
+	var myChart = new Chart(ctx,
+			{
+				type : 'bar',
+				data : {
+					labels :ti,
+					datasets : [ {
+						label : '# of Votes',
+						data : arr,
+						backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+								'rgba(54, 162, 235, 0.2)',
+								'rgba(255, 206, 86, 0.2)',
+								'rgba(75, 192, 192, 0.2)',
+								'rgba(153, 102, 255, 0.2)',
+								'rgba(255, 159, 64, 0.2)' ],
+						borderColor : [ 'rgba(255, 99, 132, 1)',
+								'rgba(54, 162, 235, 1)',
+								'rgba(255, 206, 86, 1)',
+								'rgba(75, 192, 192, 1)',
+								'rgba(153, 102, 255, 1)',
+								'rgba(255, 159, 64, 1)' ],
+						borderWidth : 1
+					} ]
+				},
+				options : {
+					scales : {
+						yAxes : [ {
+							ticks : {
+								beginAtZero : true
+							}
+						} ]
+					}
+				}
+			});
+}
 </script>
 </head>
 <body style="font-family: Jal_Onuel;">
+
+	
+
 	<%@ include file="./module/header.jsp"%>
 	<!-- 상단 Header End  -->
+	<div class="container">
+		<canvas id="myChart"></canvas>
+	</div>
 
 	<div class="container">
 		<div style="height: 60px;"></div>

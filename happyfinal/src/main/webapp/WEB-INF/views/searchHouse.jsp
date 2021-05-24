@@ -113,7 +113,6 @@
 						    return function() {
 						        infowindow.close();
 						    };
-						}
 					</script>
 				</div>
 
