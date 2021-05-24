@@ -154,8 +154,6 @@ div.right {
 
 </head>
 
-
-
 <body style="font-family: Jal_Onuel;">
 	<%@ include file="./module/header.jsp"%>
 	<!-- 상단 Header End  -->
@@ -203,23 +201,46 @@ div.right {
 			</div>
 		</form>
 	</div>
+	
+	<div>
+	<div class="left col-md-4">
+			<c:if test="${retailList.size() != 0}">
+				<c:forEach var="retail" items="${retailList}">
+					<table class="table table-active">
+						<tbody>
+							<tr>
+								<td>이름 : ${retail.name}</td>
+							</tr>
+							<tr>
+								<td>상세 : ${retail.detail}</td>
+							</tr>
+							<tr>
+								<td>주소 : ${retail.address}</td>
+							</tr>
+						</tbody>
+					</table>
+				</c:forEach>
+			</c:if>
+			<c:if test="${retailList.size() == 0}">
+				<table class="table table-active">
+					<tbody>
+						<tr class="table-info" align="center">
+							<td>정보가 없습니다.</td>
+						</tr>
+					</tbody>
+				</table>
+			</c:if>
+		</div>
 
 
-	<div class="container">
+	<div class="right col-md-8">
 		<div style="height: 60px;"></div>
 		<!-- 중앙 contents start -->
 		<div class="row">
-			<div class="col-md-6">
-				<canvas id="guhiChart"></canvas>
-			</div>
-			<div class="col-md-6">
-				<canvas id="gulowChart"></canvas>
-			</div>
-			<!-- 중앙 center contents start -->
 			<div class="col-md-12">
 				<!-- 지도 Section Start  -->
 				<div class="container">
-					<div id="map" style="max-width: 1200px; height: 500px;"></div>
+					<div id="map" style="max-width: 1800px; height: 500px;"></div>
 					<script type="text/javascript"
 						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eb94e0a165fada25939d9bf736b9992f"></script>
 					<script>
@@ -292,37 +313,7 @@ div.right {
 			<div style="height: 40px;"></div>
 			<!-- 중앙 contents end -->
 		</div>
-
-
-
-		<div>
-			<c:if test="${retailList.size() != 0}">
-				<c:forEach var="retail" items="${retailList}">
-					<table class="table table-active">
-						<tbody>
-							<tr>
-								<td>이름 : ${retail.name}</td>
-							</tr>
-							<tr>
-								<td>상세 : ${retail.detail}</td>
-							</tr>
-							<tr>
-								<td>주소 : ${retail.address}</td>
-							</tr>
-						</tbody>
-					</table>
-				</c:forEach>
-			</c:if>
-			<c:if test="${retailList.size() == 0}">
-				<table class="table table-active">
-					<tbody>
-						<tr class="table-info" align="center">
-							<td>정보가 없습니다.</td>
-						</tr>
-					</tbody>
-				</table>
-			</c:if>
-		</div>
+		
 
 		<%@ include file="./module/footer.jsp"%>
 		<!-- 하단 Footer End  -->
