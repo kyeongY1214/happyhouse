@@ -78,7 +78,7 @@
 							console.log(data);
 							positions.push(data);
 						</c:forEach>
-					
+			
 						var map = new kakao.maps.Map(container, options);
 
 						var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 

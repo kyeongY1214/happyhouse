@@ -29,10 +29,6 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
 	$(function() {
@@ -192,20 +188,24 @@
 					id="retail_search">주변상가찾기</button>
 			</div>
 		</form>
-
 	</div>
+
 
 	<div class="container">
 		<div style="height: 60px;"></div>
-
-
+		<!-- 중앙 contents start -->
 		<div class="row">
+			<div class="col-md-6">
+				<canvas id="guhiChart"></canvas>
+			</div>
+			<div class="col-md-6">
+				<canvas id="gulowChart"></canvas>
+			</div>
 			<!-- 중앙 center contents start -->
 			<div class="col-md-12">
 				<!-- 지도 Section Start  -->
 				<div class="container">
 					<div id="map" style="max-width: 1200px; height: 500px;"></div>
-
 					<script type="text/javascript"
 						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eb94e0a165fada25939d9bf736b9992f"></script>
 					<script>
@@ -215,19 +215,16 @@
 						
 						var index=0;
 						var positions= [];
+						var options = {
+								center : new kakao.maps.LatLng(${retailList[0].lng}, ${retailList[0].lat}),
+								level : 6
+							};
 						<c:forEach var="retail" items="${retailList}">
-							if(index==0){
-								var options = {
-										center : new kakao.maps.LatLng(${retail.lat}, ${retail.lng}),
-										level : 6
-									};
-								index++;
-							}
 							var data = {
 									content : '<div>${{retail.name}}</div>',
-									latlng : new kakao.maps.LatLng(${retail.lat}, ${retail.lng})
+									latlng : new kakao.maps.LatLng(${retail.lng}, ${retail.lat})
 							}
-							document.write(data);
+							console.log(data);
 							positions.push(data);
 						</c:forEach>
 					
@@ -258,6 +255,8 @@
 						    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 						}
 						
+						map.relayout()
+						
 						
 						// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
 						function makeOverListener(map, marker, infowindow) {
@@ -279,44 +278,43 @@
 			<div style="height: 40px;"></div>
 			<!-- 중앙 contents end -->
 		</div>
-	</div>
 
-	<div>
-		<c:if test="${retailList.size() != 0}">
-			<c:forEach var="retail" items="${retailList}">
+
+
+		<div>
+			<c:if test="${retailList.size() != 0}">
+				<c:forEach var="retail" items="${retailList}">
+					<table class="table table-active">
+						<tbody>
+							<tr>
+								<td>이름 : ${retail.name}</td>
+							</tr>
+							<tr>
+								<td>상세 : ${retail.detail}</td>
+							</tr>
+							<tr>
+								<td>주소 : ${retail.address}</td>
+							</tr>
+						</tbody>
+					</table>
+				</c:forEach>
+			</c:if>
+			<c:if test="${retailList.size() == 0}">
 				<table class="table table-active">
 					<tbody>
-						<tr>
-							<td>이름 : ${retail.name}</td>
-						</tr>
-						<tr>
-							<td>상세 : ${retail.detail}</td>
-						</tr>
-						<tr>
-							<td>주소 : ${retail.address}</td>
+						<tr class="table-info" align="center">
+							<td>정보가 없습니다.</td>
 						</tr>
 					</tbody>
 				</table>
-			</c:forEach>
-		</c:if>
-		<c:if test="${retailList.size() == 0}">
-			<table class="table table-active">
-				<tbody>
-					<tr class="table-info" align="center">
-						<td>정보가 없습니다.</td>
-					</tr>
-				</tbody>
-			</table>
-		</c:if>
-	</div>
+			</c:if>
+		</div>
 
-	<%@ include file="./module/footer.jsp"%>
-	<!-- 하단 Footer End  -->
+		<%@ include file="./module/footer.jsp"%>
+		<!-- 하단 Footer End  -->
 
-	<!-- The Modal -->
-	<%@ include file="./module/infoModal.jsp"%>
-	<%@ include file="./module/loginModal.jsp"%>
-
-
+		<!-- The Modal -->
+		<%@ include file="./module/infoModal.jsp"%>
+		<%@ include file="./module/loginModal.jsp"%>
 </body>
 </html>
