@@ -15,4 +15,7 @@ public interface HouseService {
 	List<HouseDto> chartList() throws SQLException;
 	List<HouseDto> lowchartList()throws SQLException;
 	
+	List<HouseDto> guhiList(String gugun) throws SQLException;
+	List<HouseDto> gulowList(String gugun)throws SQLException;
+	
 }

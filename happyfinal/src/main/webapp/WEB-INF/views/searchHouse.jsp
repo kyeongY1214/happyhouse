@@ -31,7 +31,9 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
 </head>
-
+<script type="text/javascript">
+	
+</script>
 
 <body style="font-family: Jal_Onuel;">
 	<%@ include file="./module/header.jsp"%>
@@ -41,6 +43,12 @@
 		<div style="height: 60px;"></div>
 		<!-- 중앙 contents start -->
 		<div class="row">
+			<div class="col-md-6">
+				<canvas id="guhiChart"></canvas>
+			</div>
+			<div class="col-md-6">
+				<canvas id="gulowChart"></canvas>
+			</div>
 			<!-- 중앙 center contents start -->
 			<div class="col-md-12">
 				<!-- 지도 Section Start  -->

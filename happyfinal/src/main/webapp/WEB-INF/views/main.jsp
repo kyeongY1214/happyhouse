@@ -32,37 +32,40 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
-
 <script type="text/javascript">
-	$(document).ready(function() {
+$(function() {
+	$("#gu").change(
+			function() {
+				$.ajax({
+					url : '${root}/chart/gugunhi/' + $("#gu").val(),
+					type : 'GET',
+					contentType : 'application/json;charset=utf-8',
+					dataType : 'json',
+					success : function(datas) {
+						makehiChart(datas);
+					},
+					error : function(xhr, status, msg) {
+						console.log("상태값 : " + status + " Http에러메시지 : " + msg);
+					}
+				});
 
-		$.ajax({
-			url : '${root}/chart/mkhichart',
-			type : 'GET',
-			contentType : 'application/json;charset=utf-8',
-			dataType : 'json',
-			success : function(datas) {
-				makehiChart(datas);
-			},
-			error : function(xhr, status, msg) {
-				console.log("상태값 : " + status + " Http에러메시지 : " + msg);
-			}
-		});
+				$.ajax({
+					url : '${root}/chart/gugunlow/' + $("#gu").val(),
+					type : 'GET',
+					contentType : 'application/json;charset=utf-8',
+					dataType : 'json',
+					success : function(datas) {
+						makelowChart(datas);
+					},
+					error : function(xhr, status, msg) {
+						console.log("상태값 : " + status + " Http에러메시지 : " + msg);
+					}
+				});
+			})
+})
 
-		$.ajax({
-			url : '${root}/chart/mklowchart',
-			type : 'GET',
-			contentType : 'application/json;charset=utf-8',
-			dataType : 'json',
-			success : function(datas) {
-				makelowChart(datas);
-			},
-			error : function(xhr, status, msg) {
-				console.log("상태값 : " + status + " Http에러메시지 : " + msg);
-			}
-		});
-	});
 	function makehiChart(datas) {
+	
 		var ctx = document.getElementById('myhiChart');
 		var arr = [ , , , , , ];
 		var ti = [ , , , , , ];
@@ -105,6 +108,7 @@
 		});
 	}
 	function makelowChart(datas) {
+		
 		var ctx = document.getElementById('mylowChart');
 		var arr = [ , , , , , ];
 		var ti = [ , , , , , ];
@@ -147,14 +151,138 @@
 		});
 	}
 </script>
+
+<script type="text/javascript">
+	 $(document).ready(function() {
+
+		$.ajax({
+			url : '${root}/chart/mkhichart',
+			type : 'GET',
+			contentType : 'application/json;charset=utf-8',
+			dataType : 'json',
+			success : function(datas) {
+				maketohiChart(datas);
+			},
+			error : function(xhr, status, msg) {
+				console.log("상태값 : " + status + " Http에러메시지 : " + msg);
+			}
+		});
+
+		$.ajax({
+			url : '${root}/chart/mklowchart',
+			type : 'GET',
+			contentType : 'application/json;charset=utf-8',
+			dataType : 'json',
+			success : function(datas) {
+				maketolowChart(datas);
+			},
+			error : function(xhr, status, msg) {
+				console.log("상태값 : " + status + " Http에러메시지 : " + msg);
+			}
+		});
+		
+		function maketohiChart(datas) {
+			
+			var ctx = document.getElementById('mytohiChart');
+			var arr = [ , , , , , ];
+			var ti = [ , , , , , ];
+			console.log(datas);
+			$(datas).each(function(index, data) {
+				console.log(data);
+				arr[index] = data.price;
+				ti[index] = data.dong;
+			});
+
+			var myhiChart = new Chart(ctx, {
+				type : 'line',
+				data : {
+					labels : ti,
+					datasets : [ {
+						label : 'Top 5 Chart',
+						data : arr,
+						backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+								'rgba(54, 162, 235, 0.2)',
+								'rgba(255, 206, 86, 0.2)',
+								'rgba(75, 192, 192, 0.2)',
+								'rgba(153, 102, 255, 0.2)',
+								'rgba(255, 159, 64, 0.2)' ],
+						borderColor : [ 'rgba(255, 99, 132, 1)',
+								'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+								'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+								'rgba(255, 159, 64, 1)' ],
+						borderWidth : 3
+					} ]
+				},
+				options : {
+					scales : {
+						yAxes : [ {
+							ticks : {
+								beginAtZero : true
+							}
+						} ]
+					}
+				}
+			});
+		}
+		function maketolowChart(datas) {
+			var ctx = document.getElementById('mytolowChart');
+			var arr = [ , , , , , ];
+			var ti = [ , , , , , ];
+			console.log(datas);
+			$(datas).each(function(index, data) {
+				console.log(data);
+				arr[index] = data.price;
+				ti[index] = data.dong;
+			});
+
+			var mylowChart = new Chart(ctx, {
+				type : 'line',
+				data : {
+					labels : ti,
+					datasets : [ {
+						label : 'Bottom 5 Chart',
+						data : arr,
+						backgroundColor : [ 
+								'rgba(54, 162, 235, 0.2)',
+								 ],
+						borderColor : [ 'rgba(255, 99, 132, 1)',
+								'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+								'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+								'rgba(255, 159, 64, 1)' ],
+						borderWidth : 3
+					} ]
+				},
+				options : {
+					scales : {
+						yAxes : [ {
+							ticks : {
+								beginAtZero : true
+							}
+						} ]
+					}
+				}
+			});
+		}
+		
+	}); 
+	
+	
+</script>
 </head>
 <body style="font-family: Jal_Onuel;">
 	<%@ include file="./module/header.jsp"%>
 	<!-- 상단 Header End  -->
 	<div class="container">
 		<!-- 중앙 contents start -->
-		<div class="row">
+		<div class="row" >
 			<!-- 차트 Section Start  -->
+			<div class="col-md-6">
+				<canvas id="mytohiChart"></canvas>
+			</div>
+			<div class="col-md-6">
+				<canvas id="mytolowChart"></canvas>
+			</div>
+			
 			<div class="col-md-6">
 				<canvas id="myhiChart"></canvas>
 			</div>
