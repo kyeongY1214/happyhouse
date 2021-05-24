@@ -14,8 +14,4 @@ public interface FavoriteService {
 	void setFavoriteList(Map<String, String> map) throws SQLException;
 	ArrayList<HouseDto> getFavoriteList(String userid)throws SQLException;
 	
-	/*
-		void setFavoriteList(String userid, String city, String dong, String gugun) throws SQLException;
-	ArrayList<HouseDto> getFavoriteList(String userid)throws SQLException;
-	 */
 }
