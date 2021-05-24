@@ -158,7 +158,7 @@ div.right {
 	<%@ include file="./module/header.jsp"%>
 	<!-- 상단 Header End  -->
 
-	<div>
+	<div class="container">
 		<form class="form-inline" id="retail_from" method="post" action="">
 			<!-- <input type="hidden" id="code"  name="code" value="code"/> -->
 			<div class="form-group md">
@@ -202,8 +202,9 @@ div.right {
 		</form>
 	</div>
 	
-	<div>
-	<div class="left col-md-4">
+	<div class="row"> 
+	<div class="col-md-4">
+		<div style="height: 60px;"></div>
 			<c:if test="${retailList.size() != 0}">
 				<c:forEach var="retail" items="${retailList}">
 					<table class="table table-active">
@@ -233,12 +234,9 @@ div.right {
 		</div>
 
 
-	<div class="right col-md-8">
+	<div class="col-md-8">
 		<div style="height: 60px;"></div>
 		<!-- 중앙 contents start -->
-		<div class="row">
-			<div class="col-md-12">
-				<!-- 지도 Section Start  -->
 				<div class="container">
 					<div id="map" style="max-width: 1800px; height: 500px;"></div>
 					<script type="text/javascript"
@@ -308,11 +306,12 @@ div.right {
 						}
 					</script>
 				</div>
-
 			</div>
 			<div style="height: 40px;"></div>
 			<!-- 중앙 contents end -->
+		
 		</div>
+		
 		
 
 		<%@ include file="./module/footer.jsp"%>
