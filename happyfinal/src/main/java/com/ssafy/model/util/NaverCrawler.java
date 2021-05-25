@@ -11,9 +11,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.tomcat.util.json.JSONParser;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class NaverCrawler {
 	final String baseUrl = "https://openapi.naver.com/v1/search/blog.json?query=";
@@ -56,6 +57,29 @@ public class NaverCrawler {
 			throw new RuntimeException("API 응답을 읽는데 실패했습니다.", e);
 		}
 
+	}
+
+	public Map<String, Object> getResult(String response, String[] fields) {
+		Map<String, Object> rtnObj = new HashMap<>();
+		try {
+			JSONParser parser = new JSONParser();
+			JSONObject result = (JSONObject) parser.parse(response);
+			rtnObj.put("total", (long) result.get("total"));
+			JSONArray items = (JSONArray) result.get("items");
+			List<Map<String, Object>> itemList = new ArrayList<>();
+			for (int i = 0; i < items.size(); i++) {
+				JSONObject item = (JSONObject) items.get(i);
+				Map<String, Object> itemMap = new HashMap<>();
+				for (String field : fields) {
+					itemMap.put(field, item.get(field));
+				}
+				itemList.add(itemMap);
+			}
+			rtnObj.put("result", itemList);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return rtnObj;
 	}
 
 }
