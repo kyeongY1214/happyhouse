@@ -82,7 +82,7 @@ public class PageNavigation {
 
 	public void makeNavigator() {
 		int startPage = (currentPage - 1) / naviSize * naviSize + 1;
-		int endPage = startPage + naviSize - 1;
+		int endPage = (startPage + naviSize - 1) /2;
 		if(totalPageCount < endPage)
 			endPage = totalPageCount;
 		
