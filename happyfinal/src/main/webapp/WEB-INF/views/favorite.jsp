@@ -135,11 +135,15 @@ div.right {
 	<!-- 상단 Header End  -->
 
 	<div class="container">
-		<div style="height: 60px;"></div>
+		<div style="height: 30px;"></div>
 		<!-- 중앙 contents start -->
 		<div class="row">
 			<!-- 중앙 center contents start -->
 			<div class="col-md-12">
+				<div style="text-align:center" >
+					<h2> <strong> 나의 관심 지역 :  ${houseList[0].dong} </strong> </h2>
+					
+				</div>
 				<!-- 지도 Section Start  -->
 				<div class="container">
 					<div id="map" style="max-width: 1200px; height: 500px;"></div>
