@@ -1,11 +1,14 @@
 package com.ssafy.happyhouse;
 
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.List;
 import java.util.Locale;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +20,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ssafy.happyhouse.model.service.AddressServiceImpl;
 
-
 @Controller
 @RequestMapping("/")
 public class HomeController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		return "main";	
+		return "main";
 	}
 
 }

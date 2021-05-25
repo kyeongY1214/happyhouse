@@ -33,39 +33,38 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 <script type="text/javascript">
-$(function() {
-	$("#gu").change(
-			function() {
-				$.ajax({
-					url : '${root}/chart/gugunhi/' + $("#gu").val(),
-					type : 'GET',
-					contentType : 'application/json;charset=utf-8',
-					dataType : 'json',
-					success : function(datas) {
-						makehiChart(datas);
-					},
-					error : function(xhr, status, msg) {
-						console.log("상태값 : " + status + " Http에러메시지 : " + msg);
-					}
-				});
+	$(function() {
+		$("#gu").change(function() {
+			$.ajax({
+				url : '${root}/chart/gugunhi/' + $("#gu").val(),
+				type : 'GET',
+				contentType : 'application/json;charset=utf-8',
+				dataType : 'json',
+				success : function(datas) {
+					makehiChart(datas);
+				},
+				error : function(xhr, status, msg) {
+					console.log("상태값 : " + status + " Http에러메시지 : " + msg);
+				}
+			});
 
-				$.ajax({
-					url : '${root}/chart/gugunlow/' + $("#gu").val(),
-					type : 'GET',
-					contentType : 'application/json;charset=utf-8',
-					dataType : 'json',
-					success : function(datas) {
-						makelowChart(datas);
-					},
-					error : function(xhr, status, msg) {
-						console.log("상태값 : " + status + " Http에러메시지 : " + msg);
-					}
-				});
-			})
-})
+			$.ajax({
+				url : '${root}/chart/gugunlow/' + $("#gu").val(),
+				type : 'GET',
+				contentType : 'application/json;charset=utf-8',
+				dataType : 'json',
+				success : function(datas) {
+					makelowChart(datas);
+				},
+				error : function(xhr, status, msg) {
+					console.log("상태값 : " + status + " Http에러메시지 : " + msg);
+				}
+			});
+		})
+	})
 
 	function makehiChart(datas) {
-	
+
 		var ctx = document.getElementById('myhiChart');
 		var arr = [ , , , , , ];
 		var ti = [ , , , , , ];
@@ -97,9 +96,9 @@ $(function() {
 				} ]
 			},
 			options : {
-				onClick: function(point, event){
+				onClick : function(point, event) {
 					mvsearch(event);
-			        },
+				},
 				scales : {
 					yAxes : [ {
 						ticks : {
@@ -111,7 +110,7 @@ $(function() {
 		});
 	}
 	function makelowChart(datas) {
-		
+
 		var ctx = document.getElementById('mylowChart');
 		var arr = [ , , , , , ];
 		var ti = [ , , , , , ];
@@ -140,13 +139,13 @@ $(function() {
 							'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
 							'rgba(255, 159, 64, 1)' ],
 					borderWidth : 1,
-					
+
 				} ]
 			},
 			options : {
-				onClick: function(point, event){
+				onClick : function(point, event) {
 					mvsearch(event);
-			        },
+				},
 				scales : {
 					yAxes : [ {
 						ticks : {
@@ -157,138 +156,206 @@ $(function() {
 			}
 		});
 	}
-	function mvsearch(event)
-	{
-	   location.href="${root}/house/search/" + event[0]._view.label;
+	function mvsearch(event) {
+		location.href = "${root}/house/search/" + event[0]._view.label;
 	}
 </script>
 
 <script type="text/javascript">
+	$(document).ready(
+			function() {
+				$.ajax({
+					url : '${root}/news/getNewsbudongsan',
+					type : 'GET',
+					contentType : 'application/json;charset=utf-8',
+					dataType : 'json',
 
-	 $(document).ready(function() {
-		 
-		   
-		 
-		$.ajax({
-			url : '${root}/chart/mkhichart',
-			type : 'GET',
-			contentType : 'application/json;charset=utf-8',
-			dataType : 'json',
-			success : function(datas) {
-				maketohiChart(datas);
-			},
-			error : function(xhr, status, msg) {
-				console.log("상태값 : " + status + " Http에러메시지 : " + msg);
-			}
-		});
+					success : function(datas) {
+						console.log(datas);
+						$("#newsbudongsan").empty();
+						var html = "<table class='table table-hover'>";
+						html += "<thead class='thead-dark'>"
+						html += "<tr align = 'center'>";
+						html += "<th>부동산 관련 기사</th>";
+						html += "</tr>"
+						html += "</thead>";
+						var news = $("#news");
 
-		$.ajax({
-			url : '${root}/chart/mklowchart',
-			type : 'GET',
-			contentType : 'application/json;charset=utf-8',
-			dataType : 'json',
-			success : function(datas) {
-				maketolowChart(datas);
-			},
-			error : function(xhr, status, msg) {
-				console.log("상태값 : " + status + " Http에러메시지 : " + msg);
-			}
-		});
-		
-		function maketohiChart(datas) {
-			
-			var ctx = document.getElementById('mytohiChart');
-			var arr = [ , , , , , ];
-			var ti = [ , , , , , ];
-			console.log(datas);
-			$(datas).each(function(index, data) {
-				console.log(data);
-				arr[index] = data.price;
-				ti[index] = data.dong;
-			});
+						$.each(datas, function(index, item) {
+							html += "<tr align = 'center'>";
+							html += "<td><a href="+item.link+" /a>"+ item.title + "</td>";
+							html += "</tr>";
+						});
 
-			var myhiChart = new Chart(ctx, {
-				type : 'line',
-				data : {
-					labels : ti,
-					datasets : [ {
-						label : 'Top 5 Chart',
-						data : arr,
-						backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-								'rgba(54, 162, 235, 0.2)',
-								'rgba(255, 206, 86, 0.2)',
-								'rgba(75, 192, 192, 0.2)',
-								'rgba(153, 102, 255, 0.2)',
-								'rgba(255, 159, 64, 0.2)' ],
-						borderColor : [ 'rgba(255, 99, 132, 1)',
-								'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
-								'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
-								'rgba(255, 159, 64, 1)' ],
-						borderWidth : 3
-					} ]
-				},
-				options : {
-					scales : {
-						yAxes : [ {
-							ticks : {
-								beginAtZero : true
-							}
-						} ]
+						html += "</table>";
+						$("#newsbudongsan").append(html);
+					},
+					error : function(xhr, status, msg) {
+						console.log("상태값 : " + status + " Http에러메시지 : " + msg);
 					}
-				}
-			});
-		}
-		function maketolowChart(datas) {
-			var ctx = document.getElementById('mytolowChart');
-			var arr = [ , , , , , ];
-			var ti = [ , , , , , ];
-			console.log(datas);
-			$(datas).each(function(index, data) {
-				console.log(data);
-				arr[index] = data.price;
-				ti[index] = data.dong;
-			});
+				});
 
-			var mylowChart = new Chart(ctx, {
-				type : 'line',
-				data : {
-					labels : ti,
-					datasets : [ {
-						label : 'Bottom 5 Chart',
-						data : arr,
-						backgroundColor : [ 
-								'rgba(54, 162, 235, 0.2)',
-								 ],
-						borderColor : [ 'rgba(255, 99, 132, 1)',
-								'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
-								'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
-								'rgba(255, 159, 64, 1)' ],
-						borderWidth : 3
-					} ]
-				},
-				options : {
-					scales : {
-						yAxes : [ {
-							ticks : {
-								beginAtZero : true
-							}
-						} ]
+				$.ajax({
+					url : '${root}/news/getNewsjutak',
+					type : 'GET',
+					contentType : 'application/json;charset=utf-8',
+					dataType : 'json',
+
+					success : function(datas) {
+						console.log(datas);
+						$("#newsjutak").empty();
+						var html = "<table class='table table-hover'>";
+						html += "<thead class='thead-dark'>"
+						html += "<tr align = 'center'>";
+						html += "<th> 주택 관련 기사</th>";
+						html += "</tr>"
+						html += "</thead>";
+						var news = $("#news");
+
+						$.each(datas, function(index, item) {
+							html += "<tr align = 'center'>";
+							html += "<td><a href="+item.link+" /a>"+ item.title + "</td>";
+							html += "</tr>";
+						});
+
+						html += "</table>";
+						$("#newsjutak").append(html);
+					},
+					error : function(xhr, status, msg) {
+						console.log("상태값 : " + status + " Http에러메시지 : " + msg);
 					}
+				});
+
+				$.ajax({
+					url : '${root}/chart/mkhichart',
+					type : 'GET',
+					contentType : 'application/json;charset=utf-8',
+					dataType : 'json',
+					success : function(datas) {
+						maketohiChart(datas);
+					},
+					error : function(xhr, status, msg) {
+						console.log("상태값 : " + status + " Http에러메시지 : " + msg);
+					}
+				});
+
+				$.ajax({
+					url : '${root}/chart/mklowchart',
+					type : 'GET',
+					contentType : 'application/json;charset=utf-8',
+					dataType : 'json',
+					success : function(datas) {
+						maketolowChart(datas);
+					},
+					error : function(xhr, status, msg) {
+						console.log("상태값 : " + status + " Http에러메시지 : " + msg);
+					}
+				});
+
+				function maketohiChart(datas) {
+
+					var ctx = document.getElementById('mytohiChart');
+					var arr = [ , , , , , ];
+					var ti = [ , , , , , ];
+					console.log(datas);
+					$(datas).each(function(index, data) {
+						console.log(data);
+						arr[index] = data.price;
+						ti[index] = data.dong;
+					});
+
+					var myhiChart = new Chart(ctx, {
+						type : 'line',
+						data : {
+							labels : ti,
+							datasets : [ {
+								label : 'Top 5 Chart',
+								data : arr,
+								backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+										'rgba(54, 162, 235, 0.2)',
+										'rgba(255, 206, 86, 0.2)',
+										'rgba(75, 192, 192, 0.2)',
+										'rgba(153, 102, 255, 0.2)',
+										'rgba(255, 159, 64, 0.2)' ],
+								borderColor : [ 'rgba(255, 99, 132, 1)',
+										'rgba(54, 162, 235, 1)',
+										'rgba(255, 206, 86, 1)',
+										'rgba(75, 192, 192, 1)',
+										'rgba(153, 102, 255, 1)',
+										'rgba(255, 159, 64, 1)' ],
+								borderWidth : 3
+							} ]
+						},
+						options : {
+							scales : {
+								yAxes : [ {
+									ticks : {
+										beginAtZero : true
+									}
+								} ]
+							}
+						}
+					});
 				}
+				function maketolowChart(datas) {
+					var ctx = document.getElementById('mytolowChart');
+					var arr = [ , , , , , ];
+					var ti = [ , , , , , ];
+					console.log(datas);
+					$(datas).each(function(index, data) {
+						console.log(data);
+						arr[index] = data.price;
+						ti[index] = data.dong;
+					});
+
+					var mylowChart = new Chart(ctx,
+							{
+								type : 'line',
+								data : {
+									labels : ti,
+									datasets : [ {
+										label : 'Bottom 5 Chart',
+										data : arr,
+										backgroundColor : [
+												'rgba(54, 162, 235, 0.2)', ],
+										borderColor : [
+												'rgba(255, 99, 132, 1)',
+												'rgba(54, 162, 235, 1)',
+												'rgba(255, 206, 86, 1)',
+												'rgba(75, 192, 192, 1)',
+												'rgba(153, 102, 255, 1)',
+												'rgba(255, 159, 64, 1)' ],
+										borderWidth : 3
+									} ]
+								},
+								options : {
+									scales : {
+										yAxes : [ {
+											ticks : {
+												beginAtZero : true
+											}
+										} ]
+									}
+								}
+							});
+				}
+
 			});
-		}
-		
-	}); 
-	
-	
 </script>
+
+<STYLE TYPE="text/css">
+table {
+	font-size: 15pt;
+}
+</STYLE>
 </head>
+
 <body style="font-family: Jal_Onuel;">
 	<%@ include file="./module/header.jsp"%>
 	<!-- 상단 Header End  -->
 	<div class="container">
 		<!-- 중앙 contents start -->
-		<div class="row" >
+		<div class="row">
 			<!-- 차트 Section Start  -->
 			<div class="col-md-6">
 				<canvas id="mytohiChart"></canvas>
@@ -296,79 +363,21 @@ $(function() {
 			<div class="col-md-6">
 				<canvas id="mytolowChart"></canvas>
 			</div>
-			
+
 			<div class="col-md-6">
 				<canvas id="myhiChart"></canvas>
 			</div>
 			<div class="col-md-6">
 				<canvas id="mylowChart"></canvas>
 			</div>
-			
+
 			<!-- 중앙 center contents start -->
 			<div class="col-md-12">
 				<div class="row mt-5">
-					<!-- 인기글 Article Start  -->
-					<div class="col-md-6">
-						<h4>[ 주택 관련 기사 ]</h4>
-						<table class="table table-hover">
-							<thead class="thead-dark">
-								<tr>
-									<th class="title">제목</th>
-									<th>작성자</th>
-									<th>조회수</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>‘은행’과 ‘보험사’의 주택담보대출 조건</td>
-									<td>이주녕</td>
-									<td>12</td>
-								</tr>
-								<tr>
-									<td>12.16 대책 후 ‘매수·매도자 모두 일단 관망세’</td>
-									<td>조밍기</td>
-									<td>98</td>
-								</tr>
-								<tr>
-									<td>구미시, 낙동강 변 국가3산단에 민간공원 조성</td>
-									<td>류해면</td>
-									<td>856</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<!-- 인기글 Article End  -->
-					<!-- 최신글 Article Start  -->
-					<div class="col-md-6">
-						<h4>[ 오늘의 뉴스 ]</h4>
-						<table class="table table-hover">
-							<thead class="thead-dark">
-								<tr>
-									<th class="title">제목</th>
-									<th>작성자</th>
-									<th>조회수</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>KB국민은행, ‘디지털헌금바구니’ 출시</td>
-									<td>안싸피</td>
-									<td>122</td>
-								</tr>
-								<tr>
-									<td>제6회 INAK사회공헌대상 프레스클럽부문 수상</td>
-									<td>하싸피</td>
-									<td>948</td>
-								</tr>
-								<tr>
-									<td>삼성전자, 한샘과 공동사업 강화 위한 업무협약 체결</td>
-									<td>김싸피</td>
-									<td>86</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<!-- 최신글 Article End  -->
+					<!-- 부동산 뉴스  -->
+					<div class="col-md-6" id="newsbudongsan"></div>
+					<!-- 부동산 뉴스  -->
+					<div class="col-md-6" id="newsjutak"></div>
 				</div>
 			</div>
 			<!-- 중앙 center contents end -->
