@@ -62,7 +62,6 @@ public class NewsController {
 				}
 				index++;
 			}
-			System.out.println(newsList.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -108,7 +107,6 @@ public class NewsController {
 				}
 				index++;
 			}
-			System.out.println(newsList.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
