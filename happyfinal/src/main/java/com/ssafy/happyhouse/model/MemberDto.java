@@ -1,5 +1,7 @@
 package com.ssafy.happyhouse.model;
 
+import java.util.List;
+
 public class MemberDto {
 
 	private String userId;
@@ -8,7 +10,7 @@ public class MemberDto {
 	private String email;
 	private String address;
 	private String joindate;
-
+	
 	public String getUserId() {
 		return userId;
 	}

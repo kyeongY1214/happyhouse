@@ -55,6 +55,12 @@ public class AdminController {
 		memberService.userDelete(userid);
 		return memberService.userList();
 	}
-
+	
+	@RequestMapping(value = "/like/{userid}", method = RequestMethod.GET, headers = { "Content-type=application/json" })
+	public List<String> likeAear(@PathVariable("userid") String userid) {
+		List<String> list = memberService.getLikeArea(userid);
+		System.out.println(list.get(0));
+		return list;
+	}
 	
 }

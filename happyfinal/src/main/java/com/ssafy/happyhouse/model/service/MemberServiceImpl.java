@@ -52,5 +52,9 @@ public class MemberServiceImpl implements MemberService {
 	public void userDelete(String userId) {
 		sqlsession.getMapper(MemberMapper.class).userDelete(userId);
 	}
+	@Override
+	public List<String> getLikeArea(String userid) {
+		return sqlsession.getMapper(MemberMapper.class).getLikeArea(userid);
+	}
 	
 }

@@ -27,6 +27,6 @@ public interface MemberMapper {
 
 //	REST
 	public List<MemberDto> userList();
-	void userDelete(String userId);
-	
+	void userDelete(String userid);
+	public List<String> getLikeArea(String userid);
 }

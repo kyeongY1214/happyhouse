@@ -25,5 +25,6 @@ public interface MemberService {
 //	adminREST 
 	public List<MemberDto> userList();
 	public void userDelete(String userId);
+	public List<String> getLikeArea(String userid);
 
 }

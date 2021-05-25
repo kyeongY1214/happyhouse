@@ -48,4 +48,10 @@
 		from member
 		order by joindate desc;
 	</select>
+	
+	<select id="getLikeArea" parameterType="String" resultType="String">
+		select CONCAT(city," ", gugun," ",dong)
+		from favorite
+		where userid = #{userid}
+	</select>
 </mapper>

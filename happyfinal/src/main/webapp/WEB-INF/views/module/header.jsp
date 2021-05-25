@@ -16,8 +16,7 @@ MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 	font-style: normal;
 }
 </style>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script>
 	$(function() {
 
@@ -132,6 +131,24 @@ MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 			}
 		%>
 	</div>
+	<%
+		if (memberDto != null && memberDto.getUserId().equals("admin")) {
+	%>
+		<div class="jumbotron jumbotron-fluid"
+		style="background-image: url(<%=root%>/img/adminimg.jpg); background-repeat: no-repeat; background-size: cover; background-position: center;">
+		<div class="container">
+			<h1 style="">
+				<a href="${root}/"
+					style="color: white; text-decoration: none; text-decoration: none;">Admin Mode
+					</a>
+			</h1>
+			<div style="border-color: white; border-style: solid;"></div>
+			<p style="color: #616161;"> .. Happy House</p>
+		</div>
+	</div>
+	<%
+			} else {
+	%>
 	<div class="jumbotron jumbotron-fluid"
 		style="background-image: url(<%=root%>/img/apart.jpg); background-repeat: no-repeat; background-size: cover; background-position: center;">
 		<div class="container">
@@ -144,6 +161,9 @@ MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 			<p style="color: #616161;">Give me, Happy House...</p>
 		</div>
 	</div>
+	<%
+			}
+	%>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 		<!-- Links -->
 		<div class="container">

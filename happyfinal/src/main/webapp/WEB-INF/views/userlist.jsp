@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<title>SSAFY-글작성</title>
+	<title>SSAFY_HappyHouse_회원목록</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
@@ -31,6 +31,32 @@
 			error:function(xhr,status,msg){
 				console.log("상태값 : " + status + " Http에러메시지 : "+msg);
 			}
+		});
+		
+		//회원 정보 보기.
+		$(document).on("dblclick", "tr.view", function() {
+			let vid = $(this).attr("data-id");
+			let vname = $(this).attr("data-id");
+			$.ajax({
+				url:'${root}/admin/like/' + vid,  
+				type:'GET',
+				contentType:'application/json;charset=utf-8',
+				success:function(areas) {
+					$("#vid").text(vid);
+					
+					let str;
+					//관심지역 리스트로 반복문 돌려야함 .
+					$("#likearea").empty();
+					$(areas).each(function (index,area) {
+						$("#likearea").append(area+"<br>");
+					})
+					
+					$("#userViewModal").modal();
+				},
+				error:function(xhr,status,msg){
+					console.log("상태값 : " + status + " Http에러메시지 : "+msg);
+				}
+			});			
 		});
 		
 		// 회원 탈퇴.
@@ -116,51 +142,6 @@
 	</table>
 </div>
 
-<!-- 회원 등록 모달 -->
-<div class="modal" id="userRegModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">회원등록</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-        <form id="memberform" method="post" action="">
-		<input type="hidden" name="act" id="act" value="">
-			<div class="form-group" align="left">
-				<label for="name">이름</label>
-				<input type="text" class="form-control" id="username" name="username" placeholder="">
-			</div>
-			<div class="form-group" align="left">
-				<label for="">아이디</label>
-				<input type="text" class="form-control" id="userid" name="userid" placeholder="">
-			</div>
-			<div class="form-group" align="left">
-				<label for="">비밀번호</label>
-				<input type="password" class="form-control" id="userpwd" name="userpwd" placeholder="">
-			</div>
-			<div class="form-group" align="left">
-				<label for="email">이메일</label><br>
-				<input type="text" class="form-control" id="email" name="email" placeholder="">
-			</div>
-			<div class="form-group" align="left">
-				<label for="">주소</label>
-				<input type="text" class="form-control" id="address" name="address" placeholder="">
-			</div>
-			<div class="form-group" align="center">
-				<button type="button" class="btn btn-primary" id="registerBtn">회원가입</button>
-				<button type="reset" class="btn btn-warning">초기화</button>
-			</div>
-		</form>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- 회원 정보 모달 -->
 <div class="modal" id="userViewModal">
   <div class="modal-dialog">
@@ -185,19 +166,13 @@
             <tr>
                 <th class="text-center">ID</th>
                 <td class="text-left" id="vid"></td>
-                <th class="text-center">회원명</th>
-                <td class="text-left" id="vname"></td>
+                
             </tr>
             <tr>
-            	<th class="text-center">이메일</th>
-                <td class="text-left" id="vemail"></td>
-                <th class="text-center">가입일</th>
-                <td class="text-left" id="vjoindate"></td>
+            	<th class="text-center">관심지역</th>
+                <td colspan="3" class="text-left" id="likearea"></td>
             </tr>
-            <tr>
-                <th class="text-center">주소</th>
-                <td class="text-left" colspan="3" id="vaddress"></td>
-            </tr>
+          
             </tbody>
         </table>
       </div>
