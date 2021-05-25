@@ -147,14 +147,11 @@ div.right {
 						
 						var index=0;
 						var positions= [];
+						var options = {
+								center : new kakao.maps.LatLng(${houseList[0].lng}, ${houseList[0].lat}),
+								level : 6
+							};
 						<c:forEach var="house" items="${houseList}">
-							if(index==0){
-								var options = {
-										center : new kakao.maps.LatLng(${house.lat}, ${house.lng}),
-										level : 6
-									};
-								index++;
-							}
 							var data = {
 									content : '<div>${{house.aptName}}</div>',
 									latlng : new kakao.maps.LatLng(${house.lat}, ${house.lng})
