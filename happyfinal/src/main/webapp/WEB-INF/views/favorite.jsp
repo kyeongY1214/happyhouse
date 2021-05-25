@@ -148,7 +148,7 @@ div.right {
 						var index=0;
 						var positions= [];
 						var options = {
-								center : new kakao.maps.LatLng(${houseList[0].lng}, ${houseList[0].lat}),
+								center : new kakao.maps.LatLng(${houseList[0].lat}, ${houseList[0].lng}),
 								level : 6
 							};
 						<c:forEach var="house" items="${houseList}">
