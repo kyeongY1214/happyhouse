@@ -212,7 +212,7 @@ div.right {
 
 		<section style="font-family: Jal_Onuel;">
 			<div class="left container pt-5" align="center">
-			관심 매물
+				관심 매물
 				<c:if test="${houseList.size() == 0}">
 					<div>관심지역을 등록해주세요.</div>
 				</c:if>
@@ -232,42 +232,47 @@ div.right {
 								</tbody>
 							</table>
 						</c:forEach>
+						<table>
+						<tr>
+						<td>${navigation.navigator}</td>
+						</tr>
+						</table>
 					</div>
 				</c:if>
-				</div>
-				<div class="right container pt-5" align="center">
-				근처 코로나 진료소
-					<c:if test="${hospitalList.size() == 0}">
-						<div>관심지역을 등록해주세요.</div>
-					</c:if>
-					<c:if test="${hospitalList.size() != 0}">
-						<div>
-							<c:forEach var="hospital" items="${hospitalList}"
-								varStatus="status">
-								<table class="table table-active">
-									<tbody>
-										<tr>
-											<td>이름:${hospital.name}
-												</p>
-											</td>
-										</tr>
-										<tr>
-											<td>주소:${hospital.address}
-												</p>
-											</td>
-										</tr>
-										<tr>
-											<td>전화번호:${hospital.tel}
-												</p>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</c:forEach>
-						</div>
-					</c:if>
-				</div>
 			</div>
+			<div class="right container pt-5" align="center">
+				근처 코로나 진료소
+				<c:if test="${hospitalList.size() == 0}">
+					<div>관심지역을 등록해주세요.</div>
+				</c:if>
+				<c:if test="${hospitalList.size() != 0}">
+					<div>
+						<c:forEach var="hospital" items="${hospitalList}"
+							varStatus="status">
+							<table class="table table-active">
+								<tbody>
+									<tr>
+										<td>이름:${hospital.name}
+											</p>
+										</td>
+									</tr>
+									<tr>
+										<td>주소:${hospital.address}
+											</p>
+										</td>
+									</tr>
+									<tr>
+										<td>전화번호:${hospital.tel}
+											</p>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</c:forEach>
+					</div>
+				</c:if>
+			</div>
+	</div>
 	</div>
 	</section>
 	<!-- 하단 Footer Start  -->

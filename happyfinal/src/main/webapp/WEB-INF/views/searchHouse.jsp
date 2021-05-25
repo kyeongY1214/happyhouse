@@ -89,6 +89,11 @@
 						        content: positions[i].content // 인포윈도우에 표시할 내용
 						    });
 						    
+						    var searchwindow = new kakao.maps.InfoWindow({
+						        content: positions[i].content // 인포윈도우에 표시할 내용
+						        //positions[i].content
+						    });
+						    
 						    // 마커를 생성합니다
 						    var marker = new kakao.maps.Marker({
 						        map: map, // 마커를 표시할 지도
@@ -98,11 +103,6 @@
 						    });
 						    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
 						    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-						    
-						     kakao.maps.event.addListener(marker, 'click', function() {
-									aptDetail(marker);
-						    }); 
-		
 						}
 						
 						
@@ -119,10 +119,7 @@
 						        infowindow.close();
 						    };
 						}
-						
-						function aptDetail(maker) {
-							console.log(maker);
-						}
+					
 					</script>
 				</div>
 

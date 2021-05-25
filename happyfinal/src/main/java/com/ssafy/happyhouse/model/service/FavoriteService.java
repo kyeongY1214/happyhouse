@@ -12,6 +12,6 @@ public interface FavoriteService {
 	
 	
 	void setFavoriteList(Map<String, String> map) throws SQLException;
-	ArrayList<HouseDto> getFavoriteList(String userid)throws SQLException;
-	
+	ArrayList<HouseDto> getFavoriteList(Map<String, String> map)throws SQLException;
+	public PageNavigation makePageNavigation(Map<String, String> map) throws Exception;
 }

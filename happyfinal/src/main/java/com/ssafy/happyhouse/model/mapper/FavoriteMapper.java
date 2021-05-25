@@ -12,7 +12,7 @@ import com.ssafy.happyhouse.model.HouseDto;
 @Mapper
 public interface FavoriteMapper {
 	
-	ArrayList<HouseDto> getFavoriteList(String userid) throws SQLException;
+	ArrayList<HouseDto> getFavoriteList(Map<String, String> map) throws SQLException;
 	void setFavoriteList(Map<String, String> map) throws SQLException;
-	
+	public int getTotalCount(Map<String, String> map) throws SQLException;
 }

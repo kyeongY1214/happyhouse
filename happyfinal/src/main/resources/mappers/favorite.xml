@@ -9,11 +9,20 @@
 		values(#{userid},#{mycity},#{mydong},#{mygu})
 	</insert>
 	
-	<select id="getFavoriteList" parameterType="String" resultType="houseDto">
+	<select id="getFavoriteList" parameterType="map" resultType="houseDto">
 		select no,AptName, f.dong, lat,lng
 		 from favorite as f
 		 left join houseinfo as h
 		 on f.dong = h.dong
 		where userid = #{userid}
+		order by no desc 
+		limit #{start}, #{spp}
+	</select>
+	
+	<select id="getTotalCount" parameterType="map" resultType="int">
+		select count(no) 
+		from housedeal join favorite
+		on housedeal.dong = favorite.dong
+		where favorite.userid = #{userid}
 	</select>
 </mapper>

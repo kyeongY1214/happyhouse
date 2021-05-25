@@ -18,6 +18,7 @@ import com.ssafy.happyhouse.model.HouseDto;
 import com.ssafy.happyhouse.model.MemberDto;
 import com.ssafy.happyhouse.model.service.FavoriteService;
 import com.ssafy.happyhouse.model.service.HospitalService;
+import com.ssafy.model.util.PageNavigation;
 
 @Controller
 @RequestMapping("/favorite")
@@ -38,9 +39,16 @@ public class FavoriteController {
 	}
 
 	@RequestMapping("/mvfav")
-	public String mvMember(HttpSession session, Model model) throws SQLException {
+	public String mvMember(HttpSession session, @RequestParam Map<String, String> map, Model model) throws Exception {
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-		List<HouseDto> list = favoriteService.getFavoriteList(memberDto.getUserId());
+		String spp = map.get("spp");
+		
+		map.put("spp", spp != null ? spp : "5");//sizePerPage
+		map.put("userid",memberDto.getUserId());
+		
+		List<HouseDto> list = favoriteService.getFavoriteList(map);
+		PageNavigation pageNavigation = favoriteService.makePageNavigation(map);
+		model.addAttribute("navigation", pageNavigation);
 		List<HospitalDto> hospital = hospitalService.getHosiptal(memberDto.getUserId());
 
 		model.addAttribute("houseList", list);
