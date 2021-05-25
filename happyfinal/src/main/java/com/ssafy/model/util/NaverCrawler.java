@@ -17,7 +17,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class NaverCrawler {
-	final String baseUrl = "https://openapi.naver.com/v1/search/blog.json?query=";
+	final String baseUrl = "https://openapi.naver.com/v1/search/news.json?query=";
 
 	public String search(String clientId, String secret, String _url) {
 		HttpURLConnection con = null;

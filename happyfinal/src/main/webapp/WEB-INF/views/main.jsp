@@ -173,15 +173,17 @@
 					success : function(datas) {
 						console.log(datas);
 						$("#newsbudongsan").empty();
-						var html = "<table border = '2'>";
+						var html = "<table class='table table-hover'>";
+						html += "<thead class='thead-dark'>"
 						html += "<tr align = 'center'>";
 						html += "<th>부동산 관련 기사</th>";
 						html += "</tr>"
+						html += "</thead>";
 						var news = $("#news");
 
 						$.each(datas, function(index, item) {
 							html += "<tr align = 'center'>";
-							html += "<td><a href="+item.link+"/a>"+ item.title + "</td>";
+							html += "<td><a href="+item.link+" /a>"+ item.title + "</td>";
 							html += "</tr>";
 						});
 
@@ -202,15 +204,17 @@
 					success : function(datas) {
 						console.log(datas);
 						$("#newsjutak").empty();
-						var html = "<table border = '2'>";
+						var html = "<table class='table table-hover'>";
+						html += "<thead class='thead-dark'>"
 						html += "<tr align = 'center'>";
-						html += "<th>주택 관련 기사</th>";
+						html += "<th> 주택 관련 기사</th>";
 						html += "</tr>"
+						html += "</thead>";
 						var news = $("#news");
 
 						$.each(datas, function(index, item) {
 							html += "<tr align = 'center'>";
-							html += "<td><a href="+item.link+"/a>"+ item.title + "</td>";
+							html += "<td><a href="+item.link+" /a>"+ item.title + "</td>";
 							html += "</tr>";
 						});
 
@@ -341,7 +345,7 @@
 
 <STYLE TYPE="text/css">
 table {
-	font-size: 18pt;
+	font-size: 15pt;
 }
 </STYLE>
 </head>
