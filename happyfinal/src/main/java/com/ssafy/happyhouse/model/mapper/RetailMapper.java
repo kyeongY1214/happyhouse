@@ -13,5 +13,6 @@ import com.ssafy.happyhouse.model.RetailDto;
 
 @Mapper
 public interface RetailMapper {
-	List<RetailDto> getRetail(Map<String, String> map) throws SQLException ;
+	List<RetailDto> getRetail(Map<String, Object> map) throws SQLException ;
+	public int getTotalCount(Map<String, String> map) throws SQLException;
 }

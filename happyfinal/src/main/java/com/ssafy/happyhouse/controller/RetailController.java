@@ -26,6 +26,7 @@ import com.ssafy.happyhouse.model.HouseDto;
 import com.ssafy.happyhouse.model.service.HouseService;
 import com.ssafy.happyhouse.model.service.MemberService;
 import com.ssafy.happyhouse.model.service.RetailService;
+import com.ssafy.model.util.PageNavigation;
 import com.ssafy.happyhouse.model.service.AddressService;
 import com.ssafy.happyhouse.model.service.FavoriteService;
 
@@ -43,10 +44,25 @@ public class RetailController {
 	RetailService retailService;
 
 	
-	@PostMapping("/search")
-	public String search(@RequestParam Map<String, String> map, Model model) throws SQLException{
+	@GetMapping("/search")
+	public String search(@RequestParam Map<String, String> map, Model model) throws Exception{
+		String spp = map.get("spp");
+		String pg = map.get("pg");
+		
+		System.out.println("mydong : " + map.get("mydong"));
+		
+		map.put("spp", spp != null ? spp : "5");//sizePerPage
+		map.put("pg", pg != null ? pg : "1");//pg
+		
+		
+		System.out.println( "SPP :" + spp + "PG : " + pg);
+		System.out.println( "controller" + " : " + map.get("pg"));
+		
 		List<RetailDto> list = retailService.getRetail(map);
+		PageNavigation pageNavigation = retailService.makePageNavigation(map);
+		model.addAttribute("navigation", pageNavigation);
 		model.addAttribute("retailList", list);
+		
 		System.out.println(list.toString());
 		return "searchRetail";
 	}

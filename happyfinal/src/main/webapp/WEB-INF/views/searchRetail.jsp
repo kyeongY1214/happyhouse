@@ -147,8 +147,15 @@ div.right {
 			$("#retail_from").attr("action", "${root}/retail/search");
 			document.getElementById("retail_from").submit();
 		});
+		
+		$(".page-item").click(function() {
+			$("#pg").val(($(this).attr("data-pg")));
+			$("#pageform").attr("action", "${root}/retail/search").submit();
+		});
 	});
 </script>
+
+
 
 
 
@@ -159,7 +166,7 @@ div.right {
 	<!-- 상단 Header End  -->
 
 	<div class="container">
-		<form class="form-inline" id="retail_from" method="post" action="">
+		<form class="form-inline" id="retail_from" method="get" action="">
 			<!-- <input type="hidden" id="code"  name="code" value="code"/> -->
 			<div class="form-group md">
 				<select class="form-control btn btn-secondary" name="mycity"
@@ -205,6 +212,11 @@ div.right {
 	<div class="row"> 
 	<div class="col-md-4">
 		<div style="height: 60px;"></div>
+		<form name="pageform" id="pageform" method="GET" action="">
+		<input type="hidden" name="pg" id="pg" value="">
+		<input type="hidden" name="mydong" id="pmydong" value="${retailList[0].dong}">
+		<input type="hidden" name="mykind" id="pmykind" value="${retailList[0].kind}">
+		</form>
 			<c:if test="${retailList.size() != 0}">
 				<c:forEach var="retail" items="${retailList}">
 					<table class="table table-active">
@@ -221,6 +233,11 @@ div.right {
 						</tbody>
 					</table>
 				</c:forEach>
+				<table>
+				<tr>
+				<td>${navigation.navigator}</td>
+				</tr>
+				</table>
 			</c:if>
 			<c:if test="${retailList.size() == 0}">
 				<table class="table table-active">
