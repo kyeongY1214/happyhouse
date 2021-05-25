@@ -166,7 +166,25 @@ $(function() {
 <script type="text/javascript">
 
 	 $(document).ready(function() {
-		 
+			$.ajax({
+				url : '${root}/news/getNews',
+				type : 'GET',
+				contentType : 'application/json;charset=utf-8',
+				dataType : 'json',
+				success : function(datas) {
+					var list = '';
+					$("#news").empty();
+					$.each(datas, function(index, item) {
+						list = '';
+						list += "<tr" +title+">" + 
+								+ "</tr>";
+						$("#news").append(list);
+					});
+				},
+				error : function(xhr, status, msg) {
+					console.log("상태값 : " + status + " Http에러메시지 : " + msg);
+				}
+			});
 		   
 		 
 		$.ajax({
@@ -308,67 +326,8 @@ $(function() {
 			<div class="col-md-12">
 				<div class="row mt-5">
 					<!-- 인기글 Article Start  -->
-					<div class="col-md-6">
-						<h4>[ 주택 관련 기사 ]</h4>
-						<table class="table table-hover">
-							<thead class="thead-dark">
-								<tr>
-									<th class="title">제목</th>
-									<th>작성자</th>
-									<th>조회수</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>‘은행’과 ‘보험사’의 주택담보대출 조건</td>
-									<td>이주녕</td>
-									<td>12</td>
-								</tr>
-								<tr>
-									<td>12.16 대책 후 ‘매수·매도자 모두 일단 관망세’</td>
-									<td>조밍기</td>
-									<td>98</td>
-								</tr>
-								<tr>
-									<td>구미시, 낙동강 변 국가3산단에 민간공원 조성</td>
-									<td>류해면</td>
-									<td>856</td>
-								</tr>
-							</tbody>
-						</table>
+					<div class="col-md-12" id="news">
 					</div>
-					<!-- 인기글 Article End  -->
-					<!-- 최신글 Article Start  -->
-					<div class="col-md-6">
-						<h4>[ 오늘의 뉴스 ]</h4>
-						<table class="table table-hover">
-							<thead class="thead-dark">
-								<tr>
-									<th class="title">제목</th>
-									<th>작성자</th>
-									<th>조회수</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>KB국민은행, ‘디지털헌금바구니’ 출시</td>
-									<td>안싸피</td>
-									<td>122</td>
-								</tr>
-								<tr>
-									<td>제6회 INAK사회공헌대상 프레스클럽부문 수상</td>
-									<td>하싸피</td>
-									<td>948</td>
-								</tr>
-								<tr>
-									<td>삼성전자, 한샘과 공동사업 강화 위한 업무협약 체결</td>
-									<td>김싸피</td>
-									<td>86</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<!-- 최신글 Article End  -->
 				</div>
 			</div>
 			<!-- 중앙 center contents end -->
