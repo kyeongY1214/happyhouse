@@ -43,12 +43,6 @@
 		<div style="height: 60px;"></div>
 		<!-- 중앙 contents start -->
 		<div class="row">
-			<div class="col-md-6">
-				<canvas id="guhiChart"></canvas>
-			</div>
-			<div class="col-md-6">
-				<canvas id="gulowChart"></canvas>
-			</div>
 			<!-- 중앙 center contents start -->
 			<div class="col-md-12">
 				<!-- 지도 Section Start  -->
@@ -104,6 +98,11 @@
 						    });
 						    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
 						    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+						    
+						     kakao.maps.event.addListener(marker, 'click', function() {
+									aptDetail(marker);
+						    }); 
+		
 						}
 						
 						
@@ -120,6 +119,10 @@
 						        infowindow.close();
 						    };
 						}
+						
+						function aptDetail(maker) {
+							console.log(maker);
+						}
 					</script>
 				</div>
 
@@ -128,22 +131,6 @@
 			<!-- 중앙 contents end -->
 		</div>
 
-
-		<!-- houseList가 있을경우 목록출력 -->
-		<c:if test="${houseList.size() != 0}">
-			<c:forEach var="house" items="${houseList}">
-				<table class="table table-active">
-					<tbody>
-						<tr class="table-info">
-							<td>이름 : ${house.aptName}</td>
-						</tr>
-						<tr>
-							<td><a href="${root}/house/${house.aptName}">상세보기</a></td>
-						</tr>
-					</tbody>
-				</table>
-			</c:forEach>
-		</c:if>
 		<!-- 작성한 글이 없을경우 출력 -->
 		<c:if test="${houseList.size() == 0}">
 			<table class="table table-active">
