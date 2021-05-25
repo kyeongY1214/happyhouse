@@ -2,6 +2,7 @@ package com.ssafy.happyhouse.model.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -20,8 +21,24 @@ public class FavoriteServiceImpl implements FavoriteService {
 	
 	@Override
 	public ArrayList<HouseDto> getFavoriteList(Map<String, String> map) throws SQLException {
-		
-		return  sqlsession.getMapper(FavoriteMapper.class).getFavoriteList(map);
+		Map<String, Object> param = new HashMap<String, Object>();
+		int currentPage = 1;
+		if(map.get("pg") == null)
+		{
+			System.out.println("pg가 null값입니다...");
+			
+		}
+		else
+		{
+			 currentPage = Integer.parseInt(map.get("pg"));
+		}
+		int sizePerPage = Integer.parseInt(map.get("spp"));
+		int start = (currentPage - 1) * sizePerPage;
+		param.put("start", start);
+		param.put("spp", sizePerPage);
+		param.put("userid",map.get("userid"));
+		System.out.println("service" + " : " + sqlsession.getMapper(FavoriteMapper.class).getFavoriteList(param).size());
+		return  sqlsession.getMapper(FavoriteMapper.class).getFavoriteList(param);
 	}
 
 	@Override
@@ -32,7 +49,7 @@ public class FavoriteServiceImpl implements FavoriteService {
 	@Override
 	public PageNavigation makePageNavigation(Map<String, String> map) throws Exception {
 		int naviSize = 10;
-		int currentPage = 1;
+		int currentPage = Integer.parseInt(map.get("pg"));
 		int sizePerPage = Integer.parseInt(map.get("spp"));
 		PageNavigation pageNavigation = new PageNavigation();
 		pageNavigation.setCurrentPage(currentPage);

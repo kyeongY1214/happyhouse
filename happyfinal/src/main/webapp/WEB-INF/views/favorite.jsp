@@ -121,6 +121,11 @@ div.right {
 			$("#facity-form").attr("action", "${root}/main?act=setfavorite");
 			document.getElementById("facity-form").submit();
 		});
+		
+		$(".page-item").click(function() {
+			$("#pg").val(($(this).attr("data-pg")));
+			$("#pageform").attr("action", "${root}/favorite/mvfav").submit();
+		});
 	});
 </script>
 
@@ -211,6 +216,11 @@ div.right {
 
 
 		<section style="font-family: Jal_Onuel;">
+		
+		<form name="pageform" id="pageform" method="GET" action="">
+		<input type="hidden" name="pg" id="pg" value="">
+		</form>
+		
 			<div class="left container pt-5" align="center">
 				관심 매물
 				<c:if test="${houseList.size() == 0}">

@@ -42,8 +42,13 @@ public class FavoriteController {
 	public String mvMember(HttpSession session, @RequestParam Map<String, String> map, Model model) throws Exception {
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 		String spp = map.get("spp");
+		String pg = map.get("pg");
+		System.out.println( "SPP :" + spp + "PG : " + pg);
+		System.out.println( "controller" + " : " + map.get("pg"));
 		
 		map.put("spp", spp != null ? spp : "5");//sizePerPage
+		map.put("pg", pg != null ? pg : "1");//pg
+		
 		map.put("userid",memberDto.getUserId());
 		
 		List<HouseDto> list = favoriteService.getFavoriteList(map);
@@ -52,6 +57,9 @@ public class FavoriteController {
 		List<HospitalDto> hospital = hospitalService.getHosiptal(memberDto.getUserId());
 
 		model.addAttribute("houseList", list);
+		
+		System.out.println(list.size());
+		
 		model.addAttribute("hospitalList", hospital);
 		return "favorite";
 	}
