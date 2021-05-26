@@ -1,5 +1,6 @@
 package com.ssafy.happyhouse.controller;
 
+import java.lang.reflect.Member;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import com.ssafy.happyhouse.model.HouseDto;
 import com.ssafy.happyhouse.model.MemberDto;
 import com.ssafy.happyhouse.model.service.FavoriteService;
 import com.ssafy.happyhouse.model.service.HospitalService;
+import com.ssafy.happyhouse.model.service.MemberService;
 import com.ssafy.model.util.PageNavigation;
 
 @Controller
@@ -30,11 +32,16 @@ public class FavoriteController {
 	@Autowired
 	HospitalService hospitalService;
 	
+	@Autowired
+	MemberService memberService;
+	
 	@PostMapping("/regist")
 	public String regist(@RequestParam Map<String, String> map, HttpSession session, Model model) throws SQLException{
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 		map.put("userid", memberDto.getUserId());
 		favoriteService.setFavoriteList(map);
+		List<String> favoriteList = memberService.getLikeArea(memberDto.getUserId());
+		session.setAttribute("favoriteArea", favoriteList);
 		return "main";
 	}
 

@@ -71,11 +71,6 @@ public class FavoriteServiceImpl implements FavoriteService {
 	}
 
 	@Override
-	public FavoriteDto getMyFavorite(String userid) throws SQLException {
-		return sqlsession.getMapper(FavoriteMapper.class).getMyFavorite(userid);
-	}
-
-	@Override
 	public void reset(String userid) throws SQLException {
 		sqlsession.getMapper(FavoriteMapper.class).reset(userid);
 	}

@@ -17,4 +17,5 @@ public interface FavoriteService {
 	public PageNavigation makePageNavigation(Map<String, String> map) throws Exception;
 	FavoriteDto getMyFavorite(String userid) throws SQLException;
 	void reset(String userid) throws SQLException;
+
 }
