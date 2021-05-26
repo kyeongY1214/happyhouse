@@ -142,9 +142,6 @@ div.right {
 				<div style="text-align: center">
 					<h2>
 						<strong> 나의 관심 지역 : ${houseList[0].dong} </strong>
-						<button type="button" class="btn-favreset btn btn-primary"
-							id="fav_reset" onclick="location.href='${root}/favorite/reset'">관심지역
-							초기화</button>
 					</h2>
 				</div>
 				<c:if test="${houseList.size() != 0}">
