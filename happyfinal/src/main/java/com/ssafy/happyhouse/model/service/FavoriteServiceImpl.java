@@ -70,9 +70,11 @@ public class FavoriteServiceImpl implements FavoriteService {
 		
 	}
 
+
 	@Override
 	public void reset(String userid) throws SQLException {
 		sqlsession.getMapper(FavoriteMapper.class).reset(userid);
+		
 	}
 	
 	
