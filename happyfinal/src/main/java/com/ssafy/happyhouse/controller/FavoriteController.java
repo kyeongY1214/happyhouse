@@ -35,6 +35,7 @@ public class FavoriteController {
 	@Autowired
 	MemberService memberService;
 	
+	
 	@PostMapping("/regist")
 	public String regist(@RequestParam Map<String, String> map, HttpSession session, Model model) throws SQLException{
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
