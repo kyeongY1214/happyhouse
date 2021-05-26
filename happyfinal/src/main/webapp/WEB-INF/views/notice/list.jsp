@@ -53,7 +53,13 @@
 	  <h2>공지사항 </h2>
 	  <table class="table table-borderless">
 	  	<tr>
+	  	<%
+					if (memberDto != null && memberDto.getUserId().equals("admin")) {
+		%>
 	  		<td align="right"><button type="button" id="mvWriteBtn" class="btn btn-link">글쓰기</button></td>
+	  	<%
+					}
+		%>
 	  	</tr>
 	  </table>
 	  <form id="searchform" method="get" class="form-inline" action="">
