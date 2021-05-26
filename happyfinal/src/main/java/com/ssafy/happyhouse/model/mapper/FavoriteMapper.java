@@ -16,4 +16,5 @@ public interface FavoriteMapper {
 	void setFavoriteList(Map<String, String> map) throws SQLException;
 	FavoriteDto getMyFavorite(String userid) throws SQLException;
 	public int getTotalCount(Map<String, String> map) throws SQLException;
+
 }
