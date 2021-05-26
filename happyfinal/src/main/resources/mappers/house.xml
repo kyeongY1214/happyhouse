@@ -15,7 +15,7 @@
 		select no, AptName, dealAmount as price, concat(dealYear," ",dealMonth," ",dealDay) as dealDate ,dong , area
 		from housedeal
 		where AptName LIKE #{aptName}
-		order by no desc
+		order by no 
 	</select>
 
 	<select id="chartList" resultType="houseDto">
