@@ -57,19 +57,16 @@
 						
 						var index=0;
 						var positions= [];
+						var options = {
+								center : new kakao.maps.LatLng(${houseList[0].lat}, ${houseList[0].lng}),
+								level : 6
+							};
+						
 						<c:forEach var="house" items="${houseList}">
-							if(index==0){
-								var options = {
-										center : new kakao.maps.LatLng(${house.lat}, ${house.lng}),
-										level : 6
-									};
-								index++;
-							}
 							var data = {
-									content : '<div>${{house.aptName}}</div>',
+									content : '<div><a href="${root}/house/${house.aptName}">${{house.aptName}}</a></div>',
 									latlng : new kakao.maps.LatLng(${house.lat}, ${house.lng})
 							}
-							console.log(data);
 							positions.push(data);
 						</c:forEach>
 			
@@ -101,8 +98,8 @@
 						        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 						        image : markerImage // 마커 이미지 
 						    });
-						    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-						    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+						    kakao.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
+						    kakao.maps.event.addListener(marker, 'mouseover', makeOutListener(infowindow));
 						}
 						
 						

@@ -38,9 +38,6 @@ public class NewsController {
 
 			String[] fields = { "title", "link", "description" };
 			Map<String, Object> result = crawler.getResult(response, fields);
-			if (result.size() > 0)
-				System.out.println("total -> " + result.get("total"));
-			
 			List<Map<String, Object>> items = (List<Map<String, Object>>) result.get("result");
 			//5개만 출력할수있게 하기
 			int index=1;
@@ -83,8 +80,6 @@ public class NewsController {
 
 			String[] fields = { "title", "link", "description" };
 			Map<String, Object> result = crawler.getResult(response, fields);
-			if (result.size() > 0)
-				System.out.println("total -> " + result.get("total"));
 			
 			List<Map<String, Object>> items = (List<Map<String, Object>>) result.get("result");
 			//5개만 출력할수있게 하기
