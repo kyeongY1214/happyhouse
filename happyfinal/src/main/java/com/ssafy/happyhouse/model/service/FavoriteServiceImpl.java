@@ -8,6 +8,8 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.ssafy.happyhouse.model.FavoriteDto;
 import com.ssafy.happyhouse.model.HouseDto;
 import com.ssafy.happyhouse.model.mapper.FavoriteMapper;
 import com.ssafy.model.util.PageNavigation;
@@ -66,6 +68,11 @@ public class FavoriteServiceImpl implements FavoriteService {
 		return pageNavigation;
 		
 		
+	}
+
+	@Override
+	public FavoriteDto getMyFavorite(String userid) throws SQLException {
+		return sqlsession.getMapper(FavoriteMapper.class).getMyFavorite(userid);
 	}
 	
 	

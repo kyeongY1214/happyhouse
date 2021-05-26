@@ -218,14 +218,14 @@ div.right {
 			<!-- 중앙 contents end -->
 		</div>
 
-
+	
 		<section style="font-family: Jal_Onuel;">
 		
 		<form name="pageform" id="pageform" method="GET" action="">
 		<input type="hidden" name="pg" id="pg" value="">
 		</form>
 		
-			<div class="left container pt-5" align="center">
+			<div class="container" align="center">
 				관심 매물
 				<c:if test="${houseList.size() == 0}">
 					<div>관심지역을 등록해주세요.</div>
@@ -254,49 +254,13 @@ div.right {
 					</div>
 				</c:if>
 			</div>
-			<div class="right container pt-5" align="center">
-				근처 코로나 진료소
-				<c:if test="${hospitalList.size() == 0}">
-					<div>관심지역을 등록해주세요.</div>
-				</c:if>
-				<c:if test="${hospitalList.size() != 0}">
-					<div>
-						<c:forEach var="hospital" items="${hospitalList}"
-							varStatus="status">
-							<table class="table table-active">
-								<tbody>
-									<tr>
-										<td>이름:${hospital.name}
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>주소:${hospital.address}
-											</p>
-										</td>
-									</tr>
-									<tr>
-										<td>전화번호:${hospital.tel}
-											</p>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</c:forEach>
-					</div>
-				</c:if>
-			</div>
-	</div>
-	</div>
-	</section>
+			
+		</section>
 	<!-- 하단 Footer Start  -->
 	<%@ include file="./module/footer.jsp"%>
 	<!-- 하단 Footer End  -->
-
 	<!-- The Modal -->
 	<%@ include file="./module/loginModal.jsp"%>
-
-
 	<%@ include file="./module/infoModal.jsp"%>
 </body>
 </html>

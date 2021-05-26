@@ -195,6 +195,9 @@ MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 				<%
 					}
 				%>
+				
+				<li class="nav-item"><a class="nav-link"
+					href="${root}/hospital/mvcorona">코로나 진료소</a></li>
 				<%-- <li class="nav-item"><a class="nav-link" href="<%=root%>/main?act=mvfavorite">관심지역등록</a></li> --%>
 			</ul>
 			<div>

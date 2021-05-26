@@ -4,11 +4,17 @@
 
 <mapper
 	namespace="com.ssafy.happyhouse.model.mapper.HospitalMapper">
-	<select id="getHosiptal" parameterType="String"
+	<select id="getHosiptal" parameterType="map"
 		resultType="hospitalDto">
 		select sido, gu, name, address, schedule_week, schedule_sat, schedule_sun, tel
-		from corona as c
-		right join favorite as f
-		on f.gugun = c.gu and f.userid=#{userid};
+		from corona
+		where gu = #{mygu}
+		limit #{start}, #{spp}
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		select count(no) 
+		from corona
+		where gu = #{mygu}
 	</select>
 </mapper>

@@ -49,18 +49,34 @@
 				<!-- Modal body -->
 				<div class="modal-body">
 					<form id="modifyform" method="post" action="">
+						
+						<div class="form-group">
+							<p> 이름:  ${userinfo.userName} </p>
+						</div>
+						
 						<div class="form-group">
 							<label for="uid">아이디:</label> <input type="text" name="info_id" id="info_id"
 								class="form-control" value="${userinfo.userId}" readonly="readonly">
 						</div>
+						
 						<div class="form-group">
 							<label for="pwd">비밀번호:</label> <input type="text" name="info_pw" id="info_pw"
 								class="form-control" value="${userinfo.userPwd}">
 						</div>
+						
+						<div class="form-group">
+							<label for="pwd">주소 :</label> <input type="text" name="info_pw" id="info_pw"
+								class="form-control" value="${userinfo.address}">
+						</div>
+						
+						<div class="form-group">
+							<p>관심지역:  ${userinfo.userId} </p>
+						</div>
+						
 						<button onclick="javascript:modify();"
 							class="btn btn-primary btn-login" data-dismiss="modal">수정</button>
 							<button onclick="javascript:deleteinfo();"
-							class="btn btn-danger btn-login" data-dismiss="modal">삭제</button>
+							class="btn btn-danger btn-login" data-dismiss="modal">탈퇴</button>
 					</form>
 				</div>
 

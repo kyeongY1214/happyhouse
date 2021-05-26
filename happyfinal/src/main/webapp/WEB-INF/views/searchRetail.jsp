@@ -156,9 +156,6 @@ div.right {
 </script>
 
 
-
-
-
 </head>
 
 <body style="font-family: Jal_Onuel;">

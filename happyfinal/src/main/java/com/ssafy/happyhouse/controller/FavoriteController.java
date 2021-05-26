@@ -54,13 +54,11 @@ public class FavoriteController {
 		List<HouseDto> list = favoriteService.getFavoriteList(map);
 		PageNavigation pageNavigation = favoriteService.makePageNavigation(map);
 		model.addAttribute("navigation", pageNavigation);
-		List<HospitalDto> hospital = hospitalService.getHosiptal(memberDto.getUserId());
-		System.out.println(list.toString());
+	
 		model.addAttribute("houseList", list);
 		
 		System.out.println(list.size());
 		
-		model.addAttribute("hospitalList", hospital);
 		return "favorite";
 	}
 	

@@ -13,5 +13,6 @@ import com.ssafy.happyhouse.model.HospitalDto;
 
 @Mapper
 public interface HospitalMapper {
-	List<HospitalDto> getHosiptal(String userid) throws SQLException ;
+	List<HospitalDto> getHosiptal(Map<String, Object> map) throws SQLException ;
+	public int getTotalCount(Map<String, String> map) throws SQLException;
 }

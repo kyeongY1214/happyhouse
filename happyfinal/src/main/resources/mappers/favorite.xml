@@ -19,6 +19,12 @@
 		limit #{start}, #{spp}
 	</select>
 	
+	<select id="getMyFavorite" parameterType="String" resultType="favoriteDto">
+		select userid,city,dong,gugun
+		from favorite 
+		where userid = #{userid}
+	</select>
+	
 	<select id="getTotalCount" parameterType="map" resultType="int">
 		select count(no) 
 		from housedeal join favorite
