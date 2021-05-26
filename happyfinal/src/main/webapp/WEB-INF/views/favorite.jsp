@@ -126,30 +126,33 @@ div.right {
 			$("#pg").val(($(this).attr("data-pg")));
 			$("#pageform").attr("action", "${root}/favorite/mvfav").submit();
 		});
+
 	});
 </script>
 
 </head>
 <body>
 	<%@ include file="./module/header.jsp"%>
-	<!-- 상단 Header End  -->
-
 	<div class="container">
 		<div style="height: 30px;"></div>
 		<!-- 중앙 contents start -->
 		<div class="row">
 			<!-- 중앙 center contents start -->
 			<div class="col-md-12">
-				<div style="text-align:center" >
-					<h2> <strong> 나의 관심 지역 :  ${houseList[0].dong} </strong> </h2>
-					
+				<div style="text-align: center">
+					<h2>
+						<strong> 나의 관심 지역 : ${houseList[0].dong} </strong>
+						<button type="button" class="btn-favreset btn btn-primary"
+							id="fav_reset" onclick="location.href='${root}/favorite/reset'">관심지역
+							초기화</button>
+					</h2>
 				</div>
-				<!-- 지도 Section Start  -->
-				<div class="container">
-					<div id="map" style="max-width: 1200px; height: 500px;"></div>
-					<script type="text/javascript"
-						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eb94e0a165fada25939d9bf736b9992f"></script>
-					<script>
+				<c:if test="${houseList.size() != 0}">
+					<div class="container">
+						<div id="map" style="max-width: 1200px; height: 500px;"></div>
+						<script type="text/javascript"
+							src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eb94e0a165fada25939d9bf736b9992f"></script>
+						<script>
 						var container = document.getElementById('map');
 
 						var jsonarray = new Array();
@@ -211,20 +214,22 @@ div.right {
 						    };
 						}
 					</script>
-				</div>
+					</div>
+
+				</c:if>
 
 			</div>
 			<div style="height: 40px;"></div>
 			<!-- 중앙 contents end -->
 		</div>
 
-	
+
 		<section style="font-family: Jal_Onuel;">
-		
-		<form name="pageform" id="pageform" method="GET" action="">
-		<input type="hidden" name="pg" id="pg" value="">
-		</form>
-		
+
+			<form name="pageform" id="pageform" method="GET" action="">
+				<input type="hidden" name="pg" id="pg" value="">
+			</form>
+
 			<div class="container" align="center">
 				관심 매물
 				<c:if test="${houseList.size() == 0}">
@@ -247,20 +252,20 @@ div.right {
 							</table>
 						</c:forEach>
 						<table>
-						<tr>
-						<td>${navigation.navigator}</td>
-						</tr>
+							<tr>
+								<td>${navigation.navigator}</td>
+							</tr>
 						</table>
 					</div>
 				</c:if>
 			</div>
-			
+
 		</section>
-	<!-- 하단 Footer Start  -->
-	<%@ include file="./module/footer.jsp"%>
-	<!-- 하단 Footer End  -->
-	<!-- The Modal -->
-	<%@ include file="./module/loginModal.jsp"%>
-	<%@ include file="./module/infoModal.jsp"%>
+		<!-- 하단 Footer Start  -->
+		<%@ include file="./module/footer.jsp"%>
+		<!-- 하단 Footer End  -->
+		<!-- The Modal -->
+		<%@ include file="./module/loginModal.jsp"%>
+		<%@ include file="./module/infoModal.jsp"%>
 </body>
 </html>

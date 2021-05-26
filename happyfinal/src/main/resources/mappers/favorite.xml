@@ -2,33 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ssafy.happyhouse.model.mapper.FavoriteMapper">
+<mapper
+	namespace="com.ssafy.happyhouse.model.mapper.FavoriteMapper">
 
 	<insert id="setFavoriteList" parameterType="map">
-		insert into favorite (userid, city, dong, gugun)
+		insert into favorite
+		(userid, city, dong, gugun)
 		values(#{userid},#{mycity},#{mydong},#{mygu})
 	</insert>
-	
-	<select id="getFavoriteList" parameterType="map" resultType="houseDto">
+
+	<select id="getFavoriteList" parameterType="map"
+		resultType="houseDto">
 		select no,AptName, f.dong, lat,lng
-		 from favorite as f
-		 left join houseinfo as h
-		 on f.dong = h.dong
+		from favorite as f
+		left join houseinfo as h
+		on f.dong = h.dong
 		where userid = #{userid}
-		order by no desc 
+		order by no desc
 		limit #{start}, #{spp}
 	</select>
-	
-	<select id="getMyFavorite" parameterType="String" resultType="favoriteDto">
+
+	<select id="getMyFavorite" parameterType="String"
+		resultType="favoriteDto">
 		select userid,city,dong,gugun
-		from favorite 
+		from favorite
 		where userid = #{userid}
 	</select>
-	
+
 	<select id="getTotalCount" parameterType="map" resultType="int">
-		select count(no) 
+		select count(no)
 		from housedeal join favorite
 		on housedeal.dong = favorite.dong
-		where favorite.userid = #{userid}
+		where
+		favorite.userid = #{userid}
 	</select>
+
+	<delete id="reset" parameterType="String">
+		delete from favorite
+		where userid=#{userid}
+	</delete>
 </mapper>

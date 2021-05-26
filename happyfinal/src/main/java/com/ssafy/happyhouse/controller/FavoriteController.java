@@ -62,4 +62,13 @@ public class FavoriteController {
 		return "favorite";
 	}
 	
+
+	@RequestMapping("/reset")
+	public String reset(HttpSession session, Model model) throws Exception {
+		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+		favoriteService.reset(memberDto.getUserId());
+		return "main";
+	}
+	
+	
 }
