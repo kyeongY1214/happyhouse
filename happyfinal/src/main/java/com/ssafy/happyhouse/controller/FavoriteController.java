@@ -75,6 +75,8 @@ public class FavoriteController {
 	public String reset(HttpSession session, Model model) throws Exception {
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 		favoriteService.reset(memberDto.getUserId());
+		List<String> favoriteList = memberService.getLikeArea(memberDto.getUserId());
+		session.setAttribute("favoriteArea", favoriteList);
 		return "main";
 	}
 	

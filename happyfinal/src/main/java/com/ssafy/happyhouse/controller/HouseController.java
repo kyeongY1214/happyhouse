@@ -49,7 +49,12 @@ public class HouseController {
 	@GetMapping("/{aptName}")
 	public String search(@PathVariable("aptName") String aptName, Model model) throws SQLException{
 		List<HouseDto> list = houseService.getAptList(aptName);
+		//replace
+		for (int i = 0; i < list.size(); i++) {
+			list.get(i).setPrice(list.get(i).getPrice().replace(",", ""));
+		}
 		model.addAttribute("aptList", list);
+		System.out.println(list.get(0).getPrice());
 		System.out.println(list.toString());
 		return "searchApt";
 	}

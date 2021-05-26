@@ -19,18 +19,25 @@ public class HouseDto {
 	String gugun; //시/구/군
 	String dong; // 동
 	
-	
-	
 	String aptName;
 	String city;
-	
 	
 	//위도 경도
 	String lat;
 	String lng;
 	
-
+	String dealDate;
 	
+	
+	
+	public String getDealDate() {
+		return dealDate;
+	}
+
+	public void setDealDate(String dealDate) {
+		this.dealDate = dealDate;
+	}
+
 	public String getCity() {
 		return city;
 	}

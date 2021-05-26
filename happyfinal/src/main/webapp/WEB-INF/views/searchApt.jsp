@@ -32,7 +32,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <style>
 html, body, div, span, applet, object, iframes, h1, h2, h3, h4, h5, h6,
@@ -71,8 +71,8 @@ table {
 
 /*css 초기화*/
 .card {
-	height: 150px;
-	width: 200px;
+	height: 200px;
+	width: 210px;
 	border-radius: 15px;
 	display: inline-block;
 	margin-top: 30px;
@@ -193,19 +193,72 @@ h1 {
 	float: right;
 }
 </style>
+<script type="text/javascript">
+	
+	$(document).ready(function() {
+		console.log("진입");
+		var ctx = document.getElementById('myAptChart');
+		var datas = ${aptList.size()};
+	
+		var arr =[];
+		var ti =[];
+		
+		arr.length = datas;
+		ti.length = datas;
 
+		var i = 0;
+		<c:forEach items="${aptList}" var="item">
+		arr[i] = "${item.price}" / "${item.area}";
+		ti[i] = "${item.dealDate}";
+		i++;
+		</c:forEach>
+		console.log(arr[3]);
+		console.log(ti[3]);
 
+		var myAptChart = new Chart(ctx, {
+			type : 'line',
+			data : {
+				labels : ti,
+				datasets : [ {
+					label :"Chart",
+					data :arr,
+					backgroundColor : [ 'rgba(125, 125, 125, 0.2)'],
+					borderColor : [<c:forEach items="${aptList}"  var="item"> 
+					'rgba(0, 0, 0, 1)',
+					</c:forEach> 
+					],
+					borderWidth : 3
+				} ]
+			},
+			options : {
+				scales : {
+					yAxes : [ {
+						ticks : {
+							beginAtZero : true
+						}
+					} ]
+				}
+			}
+		});
 
-
+	});
+</script>
 
 <body style="font-family: Jal_Onuel;">
 	<%@ include file="./module/header.jsp"%>
 	<!-- 상단 Header End  -->
-	<!-- houseList가 있을경우 목록출력 -->
+	<div class="container">
+		<div class="col-md-12" style="text-align:center">
+		 <p style="font-size:25px"><strong>날짜순 면적 대비 거래가격 </strong></p>
+		</div>
+		<div class="col-md-12">
+			<canvas id="myAptChart"></canvas>
+		</div>
+	</div>
+	<!-- aptList가 있을경우 목록출력 -->
 	<c:if test="${aptList.size() != 0}">
 		<c:forEach var="apt" items="${aptList}">
 			<div class="card">
-				<div class="card-header-is_closed"></div>
 				<div class="card-body">
 					<div class="card-body-header">
 						<h1>${apt.aptName}</h1>
@@ -234,8 +287,8 @@ h1 {
 			</tbody>
 		</table>
 	</c:if>
-
-
+	
+	
 	<!-- 하단 Footer Start  -->
 	<%@ include file="./module/footer.jsp"%>
 	<!-- 하단 Footer End  -->

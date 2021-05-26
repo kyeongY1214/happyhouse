@@ -41,6 +41,7 @@
 				contentType : 'application/json;charset=utf-8',
 				dataType : 'json',
 				success : function(datas) {
+					console.log(datas);
 					makehiChart(datas);
 				},
 				error : function(xhr, status, msg) {

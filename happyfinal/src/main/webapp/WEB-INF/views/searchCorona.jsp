@@ -136,7 +136,7 @@ div.right {
 							<table class="table table-active">
 								<tbody>
 									<tr>
-										<td>이름:${hospital.name}</td>
+										<td><a href="https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${hospital.name}">진료소 이름:${hospital.name}</a></td>
 									</tr>
 									<tr>
 										<td>주소:${hospital.address}</td>

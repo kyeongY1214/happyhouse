@@ -12,9 +12,10 @@
 
 	<select id="getAptList" parameterType="String"
 		resultType="houseDto">
-		select no,AptName, dealAmount as price, dong, area
+		select no, AptName, dealAmount as price, concat(dealYear," ",dealMonth," ",dealDay) as dealDate ,dong , area
 		from housedeal
 		where AptName LIKE #{aptName}
+		order by concat(dealYear," ",dealMonth," ",dealDay) desc
 	</select>
 
 	<select id="chartList" resultType="houseDto">
